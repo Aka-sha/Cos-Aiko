@@ -10,8 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CosAiko">
         <activity
-            android:name=".SwipeActivity"
-            android:exported="false" />
+            android:name=".TabPage"
+            android:exported="false"
+            android:label="@string/title_activity_tab_page" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

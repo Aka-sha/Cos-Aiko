@@ -25,8 +25,8 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "whatever",Toast.LENGTH_SHORT).show();
         if (username.getText().toString().equals("admin")  && password.getText().toString().equals("password") ){
             Toast.makeText(getApplicationContext(),"Hello Javatpoint",Toast.LENGTH_SHORT).show();
-            Intent swipePage = new Intent(getApplicationContext(), SwipeActivity.class);
-            startActivity(swipePage);
+            Intent tabPage = new Intent(getApplicationContext(), TabPage.class);
+            startActivity(tabPage);
         }
     }
 }
