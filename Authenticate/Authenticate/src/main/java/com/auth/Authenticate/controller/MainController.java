@@ -2,7 +2,8 @@ package com.auth.Authenticate.controller;
 
 import java.util.*;
 
-import com.auth.Authenticate.entity.User;
+import com.auth.Authenticate.data.UserDto;
+import com.auth.Authenticate.entity.UserEntity;
 import com.auth.Authenticate.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -21,25 +22,25 @@ public class MainController {
 
     // READ (GET) \\
     @GetMapping("/users")
-    public List<User> list() { // All users
+    public List<UserEntity> list() { // All users
         return service.listAll();
     }
 
 
     @GetMapping("/users/{id}")
-    public ResponseEntity<User> get(@PathVariable Integer id) { // User by ID
+    public ResponseEntity<UserEntity> get(@PathVariable Integer id) { // User by ID
         try {
-            User user = service.get(id);
-            return new ResponseEntity<User>(user, HttpStatus.OK);
+            UserEntity user = service.get(id);
+            return new ResponseEntity<UserEntity>(user, HttpStatus.OK);
         } catch (NoSuchElementException e) {
-            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<UserEntity>(HttpStatus.NOT_FOUND);
         }
     }
 
     @GetMapping("users/{email}/{password}") // User by email AND password - for authentication
     public ResponseEntity<String> getUserCredentials(@PathVariable String email, @PathVariable String password) {
         try {
-            User user = service.getCredentials(email, password);
+            UserEntity user = service.getCredentials(email, password);
             if (user == null) { // user email-password combo doesn't match any records
                 throw new NoSuchElementException();
             }
@@ -52,16 +53,22 @@ public class MainController {
     }
 
     // CREATE (POST) \\
-    @PostMapping("/users/newUser") // create new user account
-    public void add(@RequestBody User user) {
-        service.save(user);
+    @PostMapping("/users/register") // create new user account
+    public UserEntity register(@RequestParam("fName") String fName, @RequestParam("lName") String lName, @RequestParam("email") String email, @RequestParam("password") String password) {
+        UserDto userDto = new UserDto();
+        userDto.setfName(fName);
+        userDto.setlName(lName);
+        userDto.setEmail(email);
+        userDto.setPassword(password);
+        UserEntity userEntity = service.saveUser(userDto);
+        return userEntity;
     }
 
     // UPDATE (PUT) \\
     @PutMapping("/users/{id}") // update user by ID
-    public ResponseEntity<?> update(@RequestBody User user, @PathVariable Integer id) {
+    public ResponseEntity<?> update(@RequestBody UserEntity user, @PathVariable Integer id) {
         try {
-            User existUser = service.get(id);
+            UserEntity existUser = service.get(id);
             service.save(user);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (NoSuchElementException e) {
