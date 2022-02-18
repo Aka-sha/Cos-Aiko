@@ -54,13 +54,14 @@ public class MainController {
 
     // CREATE (POST) \\
     @PostMapping("/users/register") // create new user account
-    public UserEntity register(@RequestParam("fName") String fName, @RequestParam("lName") String lName, @RequestParam("email") String email, @RequestParam("password") String password) {
-        UserDto userDto = new UserDto();
-        userDto.setfName(fName);
-        userDto.setlName(lName);
-        userDto.setEmail(email);
-        userDto.setPassword(password);
-        UserEntity userEntity = service.saveUser(userDto);
+    //@RequestParam("fName") String fName, @RequestParam("lName") String lName, @RequestParam("email") String email, @RequestParam("password") String password
+    public UserEntity register(@RequestBody final UserDto userData) {
+//        UserDto userDto = new UserDto();
+//        userDto.setfName(fName);
+//        userDto.setlName(lName);
+//        userDto.setEmail(email);
+//        userDto.setPassword(password);
+        UserEntity userEntity = service.saveUser(userData);
         return userEntity;
     }
 
