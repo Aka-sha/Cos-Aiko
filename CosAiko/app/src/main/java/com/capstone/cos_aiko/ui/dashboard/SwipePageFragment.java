@@ -4,23 +4,23 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.capstone.cos_aiko.R;
 import com.capstone.cos_aiko.databinding.FragmentDashboardBinding;
-import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
-import java.util.ArrayList;
-
+<<<<<<< HEAD:CosAiko/app/src/main/java/com/capstone/cos_aiko/ui/dashboard/SwipePageFragment.java
 public class SwipePageFragment extends Fragment {
     ArrayList<String> s;
     ArrayAdapter arrayAdapter;
     int n=0;
+=======
+public class DashboardFragment extends Fragment {
+
+>>>>>>> origin/main:CosAiko/app/src/main/java/com/capstone/cos_aiko/ui/dashboard/DashboardFragment.java
     private FragmentDashboardBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -32,6 +32,7 @@ public class SwipePageFragment extends Fragment {
         View root = binding.getRoot();
 
         final TextView textView = binding.textDashboard;
+<<<<<<< HEAD:CosAiko/app/src/main/java/com/capstone/cos_aiko/ui/dashboard/SwipePageFragment.java
         swipePageViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
         s = new ArrayList<String>();
@@ -74,6 +75,9 @@ public class SwipePageFragment extends Fragment {
 
             }
         });
+=======
+        dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+>>>>>>> origin/main:CosAiko/app/src/main/java/com/capstone/cos_aiko/ui/dashboard/DashboardFragment.java
         return root;
     }
 

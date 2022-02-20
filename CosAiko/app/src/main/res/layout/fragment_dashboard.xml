@@ -19,43 +19,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-
-    <com.lorentzos.flingswipe.SwipeFlingAdapterView
-        android:id="@+id/frame"
-        android:background="#ffeee9e2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        app:rotation_degrees="15.5"
-        tools:context=".MyActivity"
-        android:layout_marginBottom="100dp"/>
-
-
-    <Button
-        android:id="@+id/left"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="Left"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.232"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.674" />
-
-    <Button
-        android:id="@+id/right"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="Right"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/left"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.68" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
