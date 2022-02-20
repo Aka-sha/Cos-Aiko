@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CosAiko">
         <activity
+            android:name=".Register"
+            android:exported="false" />
+        <activity
             android:name=".TabPage"
             android:exported="false"
             android:label="@string/title_activity_tab_page" />
