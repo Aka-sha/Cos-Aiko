@@ -23,4 +23,8 @@
     <string name="title_notifications">Notifications</string>
     <string name="Calendar">Calendar</string>
     <string name="Find_People">Find_People</string>
+    <string name="confirmPassword">Confirm Password</string>
+    <string name="Email">Email Address</string>
+    <string name="fname">fname</string>
+    <string name="lname">lname</string>
 </resources>
