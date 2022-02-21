@@ -80,4 +80,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void goToRegister(View v){
+        Intent tabPage = new Intent(getApplicationContext(), Register.class);
+        startActivity(tabPage);
+    }
 }
