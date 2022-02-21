@@ -5,6 +5,7 @@ public class ApiUtils {
     public static final String BASE_URL = "http://152.13.76.150:8080/users/";
 
     public static UserService getUserService(){
+        // create retrofit client
         return RetrofitClient.getClient(BASE_URL).create(UserService.class);
     }
 
