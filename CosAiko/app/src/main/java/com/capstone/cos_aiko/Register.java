@@ -20,7 +20,6 @@ import retrofit2.Response;
 public class Register extends AppCompatActivity {
     EditText username;
     EditText password;
-    EditText email;
     EditText fname;
     EditText lname;
     String USERNAME, PASSWORD;
@@ -33,18 +32,16 @@ public class Register extends AppCompatActivity {
         userService = ApiUtils.getUserService();
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
-        email = (EditText) findViewById(R.id.email);
         fname = (EditText) findViewById(R.id.fname);
         lname = (EditText) findViewById(R.id.lname);
     }
     public void registerButton(View view){
         String usernameText = username.getText().toString();
         String passwordText = password.getText().toString();
-        String emailText = email.getText().toString();
         String fnameText = fname.getText().toString();
         String lnameText = lname.getText().toString();
 
-        User user = new User( fnameText, lnameText, emailText, passwordText);
+        User user = new User(1, fnameText, lnameText, usernameText, passwordText);
         register(user);
     }
     private void register(User user) {
