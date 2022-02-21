@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Item"
+        android:id="@+id/calendar"
+        android:icon="@drawable/ic_calendar"/>
+    <item android:title="Item"
+        android:id="@+id/findpeople"
+        android:icon="@drawable/ic_fire"/>
+    <item android:title="Item"
+        android:id="@+id/messages"
+        android:icon="@drawable/ic_message"/>
+
+</menu>

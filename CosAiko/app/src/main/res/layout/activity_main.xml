@@ -4,15 +4,62 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/blured_background_withlogo"
     tools:context=".MainActivity">
 
-    <TextView
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/custom_input"
+        android:padding="20dp"
+
+        android:hint="@string/username"
+        android:drawablePadding="12dp"
+        android:textColor="@color/white"
+        android:drawableStart="@drawable/ic_username"
+        android:textColorHint="#69707a"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/password"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.915"
+        tools:layout_editor_absoluteX="10dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:layout_below="@id/password"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginRight="64dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password"
+        app:layout_constraintVertical_bias="0.0"
+        android:backgroundTint="#d6dc1c"
+        android:text="login"
+        android:textColor="#69707a"
+        android:onClick="loginButton"/>
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/ic_password"
+        android:drawablePadding="12dp"
+        android:hint="@string/password"
+        android:padding="20dp"
+        android:textColor="@color/white"
+        android:textColorHint="#69707a"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.833"
+        tools:layout_editor_absoluteX="9dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
