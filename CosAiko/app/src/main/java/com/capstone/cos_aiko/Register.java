@@ -13,6 +13,8 @@ import com.capstone.cos_aiko.model.UserResponse;
 import com.capstone.cos_aiko.remote.ApiUtils;
 import com.capstone.cos_aiko.remote.UserService;
 
+import java.util.regex.Pattern;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -67,8 +69,8 @@ public class Register extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Hello Javatpoint", Toast.LENGTH_SHORT).show();
                     Intent tabPage = new Intent(getApplicationContext(), TabPage.class);
                     startActivity(tabPage);
-                } else { // no successfully registered
-                    Toast.makeText(getApplicationContext(), response.errorBody().toString(), Toast.LENGTH_SHORT).show();
+                } else { // not succussfel because email already exists - 400 error code (BAD REQUEST)
+                    Toast.makeText(getApplicationContext(), "Email already exists", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -90,6 +92,9 @@ public class Register extends AppCompatActivity {
         } else if (username == null || username.trim().length() == 0) { // validate email
             Toast.makeText(getApplicationContext(), "Email is required", Toast.LENGTH_SHORT).show();
             return false;
+        } else if (!checkValidFormat(username)) { // check email format
+            Toast.makeText(getApplicationContext(), "Invalid email", Toast.LENGTH_SHORT).show();
+            return false;
         } else if (password == null || password.trim().length() == 0) { // validate password
             Toast.makeText(getApplicationContext(), "Password is required", Toast.LENGTH_SHORT).show();
             return false;
@@ -99,6 +104,17 @@ public class Register extends AppCompatActivity {
         } else {
             return true;
         }
+    }
+
+    private boolean checkValidFormat(String email) { // check email format
+        String emailRegex = "^(?=.{1,50}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
+                + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,7})$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        if (email == null) {
+            return false;
+        }
+        // return true if email matches pattern - false otherwise
+        return pattern.matcher(email.trim()).matches();
     }
 
 }

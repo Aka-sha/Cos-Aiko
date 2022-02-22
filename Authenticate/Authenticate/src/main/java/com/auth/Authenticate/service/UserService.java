@@ -23,6 +23,14 @@ public class UserService {
     @Autowired
     PasswordEncoder passwordEncoder;
 
+    public boolean checkEmailExists(String email) {
+        UserEntity user = repo.findByEmail(email);
+        if (user == null) { // if user is null, email does not exist in user table
+            return false;
+        }
+        return true; // email already exists
+    }
+
     public UserEntity saveUser(final UserDto userData) {
         UserEntity userModel = addUserData(userData);
         return repo.save(userModel);
