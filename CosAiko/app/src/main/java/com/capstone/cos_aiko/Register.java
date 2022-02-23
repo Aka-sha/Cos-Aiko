@@ -98,6 +98,9 @@ public class Register extends AppCompatActivity {
         } else if (password == null || password.trim().length() == 0) { // validate password
             Toast.makeText(getApplicationContext(), "Password is required", Toast.LENGTH_SHORT).show();
             return false;
+        } else if(password.trim().length() < 8  || password.trim().length() > 32){ // force password length
+            Toast.makeText(getApplicationContext(), "Password must be between 8 and 32 characters", Toast.LENGTH_SHORT).show();
+            return false;
         } else if (!password.equals(confirmPwd)) {
             Toast.makeText(getApplicationContext(), "Password and Confirm Password MUST match!", Toast.LENGTH_SHORT).show();
             return false;
