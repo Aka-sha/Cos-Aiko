@@ -27,9 +27,6 @@ public class ConventionEntity {
     @Column(name = "website")
     private String website;
 
-    @Column(name = "price")
-    private double price;
-
     /// CONSTRUCTOR \\\
     public ConventionEntity() {
 
@@ -66,10 +63,6 @@ public class ConventionEntity {
         return this.website;
     }
 
-    public double getPrice(){
-        return this.price;
-    }
-
     /// SETTERS \\\
     public void setCid(Integer cid) {
         this.cid = cid;
@@ -97,10 +90,6 @@ public class ConventionEntity {
 
     public void setWebsite(String website) {
         this.website = website;
-    }
-
-    public void setPrice(double price){
-        this.price = price;
     }
 
 }
