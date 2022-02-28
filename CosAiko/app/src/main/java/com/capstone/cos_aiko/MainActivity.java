@@ -59,26 +59,30 @@ public class MainActivity extends AppCompatActivity {
 
     private void login(String username, String password) {
         // Make API call with parameter email and password
-        Call<ResponseBody> call = userService.login(username, password);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                // check if credentials matched (response code of 200 = success)
-                if (response.isSuccessful()) {
-                    // login successful
-                    Toast.makeText(getApplicationContext(), "Hello Javatpoint", Toast.LENGTH_SHORT).show();
-                    Intent tabPage = new Intent(getApplicationContext(), TabPage.class);
-                    startActivity(tabPage);
-                } else { // response code 404 (no matching credentials)
-                    Toast.makeText(getApplicationContext(), "The username or password is invalid", Toast.LENGTH_SHORT).show();
-                }
-            }
+//        Call<ResponseBody> call = userService.login(username, password);
+//        call.enqueue(new Callback<ResponseBody>() {
+//            @Override
+//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//                // check if credentials matched (response code of 200 = success)
+//                if (response.isSuccessful()) {
+//                    // login successful
+//                    Toast.makeText(getApplicationContext(), "Hello Javatpoint", Toast.LENGTH_SHORT).show();
+//                    Intent tabPage = new Intent(getApplicationContext(), TabPage.class);
+//                    startActivity(tabPage);
+//                } else { // response code 404 (no matching credentials)
+//                    Toast.makeText(getApplicationContext(), "The username or password is invalid", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call call, Throwable t) {
+//                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
-            @Override
-            public void onFailure(Call call, Throwable t) {
-                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+
+        Intent tabPage = new Intent(getApplicationContext(), TabPage.class);
+        startActivity(tabPage);
     }
 
     public void goToRegister(View v){
