@@ -13,9 +13,11 @@
         android:theme="@style/Theme.CosAiko"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ProfilePage"
+            android:name=".PictureSelect"
             android:exported="false" />
-        <!-- For cleartext (HTTP) -->
+        <activity
+            android:name=".ProfilePage"
+            android:exported="false" /> <!-- For cleartext (HTTP) -->
         <activity
             android:name=".Register"
             android:exported="false" />

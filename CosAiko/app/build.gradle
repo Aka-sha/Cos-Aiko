@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.capstone.cos_aiko"
-        minSdkVersion 16
+        minSdk 19
         targetSdkVersion 31
         versionCode 1
         versionName "1.0"
@@ -32,7 +32,8 @@ android {
 }
 
 dependencies {
-
+    // Library for uploading pictures
+    implementation 'com.github.dhaval2404:imagepicker:2.1'
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     // This library is used by retrofit internally to convert json-pojo and pojo-json
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
