@@ -61,6 +61,11 @@ public class UserService {
         return repo.findById(id).get();
     }
 
+    // select user by email
+    public UserEntity getByEmail(String email){
+        return repo.findByEmail(email);
+    }
+
     // select user by email and password - for authenticating login
     public UserEntity getCredentials(String email, String password) {
         UserEntity user = repo.findByEmail(email);
