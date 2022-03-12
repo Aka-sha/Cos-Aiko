@@ -13,6 +13,21 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
+
+    <!--CALENDAR-->
+    <string name="left">(-</string>
+    <string name="right">)-</string>
+    <string name="month_year">mar 2022</string>
+    <string name="weekday0">SUN</string>
+    <string name="weekday1">MON</string>
+    <string name="weekday2">TUE</string>
+    <string name="weekday3">WED</string>
+    <string name="weekday4">THU</string>
+    <string name="weekday5">FRI</string>
+    <string name="weekday6">SAT</string>
+    <string name="day1">1</string>
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="calendar">calendar</string>
