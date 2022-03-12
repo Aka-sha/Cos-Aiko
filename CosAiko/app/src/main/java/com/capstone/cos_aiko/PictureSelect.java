@@ -22,7 +22,7 @@ public class PictureSelect extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_picture_select);
         firstImage = (ImageView) findViewById(R.id.first_pic_view);
-        addImageButton = (Button) findViewById(R.id.image_select);
+        //addImageButton = (Button) findViewById(R.id.image_select);
         fab = (FloatingActionButton) findViewById(R.id.add_pic_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
