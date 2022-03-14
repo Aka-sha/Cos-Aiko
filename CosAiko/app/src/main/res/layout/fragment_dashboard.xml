@@ -33,14 +33,19 @@
         android:layout_marginBottom="100dp"/>
 
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginTop="150dp"
         android:height="80dp"
-        android:background="@drawable/rounded_button"
-        android:text="Left"
+        android:background="@drawable/circular_button"
+        app:icon="@drawable/ic_thumbs_down"
+        app:iconTint="@color/black"
+        app:iconPadding="0dp"
+        app:iconGravity="textStart"
+        app:iconSize="32dp"
+        app:backgroundTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.244"
@@ -48,20 +53,26 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.806" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginTop="150dp"
         android:height="80dp"
-        android:background="@drawable/rounded_button"
-        android:text="Right"
+        app:iconPadding="0dp"
+        android:background="@drawable/circular_button"
+        app:backgroundTint="@color/white"
+        app:iconTint="@color/black"
+        app:icon="@drawable/heart_icon"
+        app:iconGravity="textStart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.383"
         app:layout_constraintStart_toEndOf="@+id/left"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.804" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

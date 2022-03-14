@@ -57,7 +57,7 @@ public class Register extends AppCompatActivity {
                     Intent tabPage = new Intent(getApplicationContext(), TabPage.class);
                     startActivity(tabPage);
                 } else { // response code 404 (no matching credentials)
-                    Toast.makeText(getApplicationContext(), "The username or password is invalid", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Failed to register, try again later.", Toast.LENGTH_SHORT).show();
                 }
             }
 

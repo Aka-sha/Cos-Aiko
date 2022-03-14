@@ -2,6 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+
+    android:elevation="3dp"
     >
     <RelativeLayout
         android:layout_width="match_parent"
@@ -12,6 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_back_button"
+            android:background="@drawable/top_bar_button"
             ></ImageView>
 
         <TextView
@@ -24,5 +27,6 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_profile"
             android:layout_alignParentEnd="true"
+            android:background="@drawable/top_bar_button"
 ></ImageView>    </RelativeLayout>
 </RelativeLayout>

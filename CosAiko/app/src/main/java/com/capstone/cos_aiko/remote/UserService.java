@@ -2,6 +2,8 @@ package com.capstone.cos_aiko.remote;
 
 import com.capstone.cos_aiko.model.User;
 
+import java.util.List;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import okhttp3.RequestBody;
@@ -15,6 +17,9 @@ public interface UserService {
     @GET("{email}/{password}")
     Call<ResponseBody> login(@Path("email") String email, @Path("password") String password);
 
-    @POST("/newUser")
+    @POST("/users/newUser")
     Call<ResponseBody> createUser(@Body User user);
+
+    @GET("/users")
+    Call<List<User>> getAllUsers();
 }
