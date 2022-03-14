@@ -31,7 +31,7 @@ public class ConventionController {
         }
     }
 
-    @PostMapping("cons/create")
+    @PostMapping("/cons/create")
     public ResponseEntity<ConventionEntity> create(@RequestBody final ConventionEntity newCon) {
         ConventionEntity con = service.save(newCon);
         return new ResponseEntity<ConventionEntity>(con, HttpStatus.OK);

@@ -32,4 +32,13 @@ public class SharedPrefManager { // manage user session using SharedPreferences
         return data;
     }
 
+    public void endSession(Context context){
+        SharedPreferences preferences;
+        SharedPreferences.Editor editor;
+        preferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        editor = preferences.edit();
+        editor.clear();
+        editor.apply();
+    }
+
 }
