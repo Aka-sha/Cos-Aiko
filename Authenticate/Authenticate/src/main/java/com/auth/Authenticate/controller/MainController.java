@@ -27,7 +27,7 @@ public class MainController {
     }
 
     @GetMapping("/users/email/{email}")
-    public ResponseEntity<UserEntity> byEmail(@PathVariable String email) {
+    public ResponseEntity<UserEntity> findByEmail(@PathVariable String email) { // get user by email
         try {
             UserEntity user = service.getByEmail(email);
             if (user == null) {
@@ -49,7 +49,7 @@ public class MainController {
         }
     }
 
-    @GetMapping("users/{email}/{password}") // User by email AND password - for authentication
+    @GetMapping("/users/{email}/{password}") // User by email AND password - for authentication
     public ResponseEntity<UserEntity> getUserCredentials(@PathVariable String email, @PathVariable String password) {
         try {
             UserEntity user = service.getCredentials(email, password);
@@ -81,7 +81,7 @@ public class MainController {
         try {
             UserEntity existUser = service.get(id);
             service.save(user);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(user, HttpStatus.OK);
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
