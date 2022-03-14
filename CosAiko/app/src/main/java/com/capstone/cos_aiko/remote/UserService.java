@@ -12,9 +12,13 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface UserService {
+    // GET method to retrieve user by email - for shared preferences
+    @GET("users/email/{email}")
+    Call<UserResponse> findByEmail(@Path("email") String email);
+
     // GET method to perform HTTP requests
     @GET("users/{email}/{password}")
-    Call<ResponseBody> login(@Path("email") String email, @Path("password") String password);
+    Call<UserResponse> login(@Path("email") String email, @Path("password") String password);
 
     // POST method to create new user
     @POST("users/register")
