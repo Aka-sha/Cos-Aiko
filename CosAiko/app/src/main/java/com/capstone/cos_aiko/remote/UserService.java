@@ -27,8 +27,8 @@ public interface UserService {
     @GET("users/{email}/{password}")
     Call<UserResponse> login(@Path("email") String email, @Path("password") String password);
 
-    @POST("/users/newUser")
-    Call<ResponseBody> createUser(@Body User user);
+    @POST("users/register")
+    Call<UserResponse> createUser(@Body User user);
 
     @GET("/users")
     Call<List<User>> getAllUsers();

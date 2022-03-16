@@ -3,31 +3,28 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/fatla/Desktop/Capstone/CosAiko/app/src/main/res/drawable/circular_button.xml" value="0.12" />
+        <entry key="..\:/Users/13364/Capstone/CosAiko/app/src/main/res/layout/activity_main.xml" value="0.23333333333333334" />
+        <entry key="..\:/Users/13364/Capstone/CosAiko/app/src/main/res/layout/activity_register.xml" value="0.23333333333333334" />
+        <entry key="..\:/Users/13364/Capstone/CosAiko/app/src/main/res/layout/activity_tab_page.xml" value="0.23333333333333334" />
+        <entry key="..\:/Users/13364/Capstone/CosAiko/app/src/main/res/layout/fragment_dashboard.xml" value="0.23333333333333334" />
+        <entry key="..\:/Users/13364/Capstone/CosAiko/app/src/main/res/layout/fragment_home.xml" value="0.23333333333333334" />
+        <entry key="..\:/Users/13364/Capstone/CosAiko/app/src/main/res/layout/fragment_notifications.xml" value="0.23333333333333334" />
+        <entry key="..\:/Users/13364/Capstone/CosAiko/app/src/main/res/layout/item.xml" value="0.23333333333333334" />
         <entry key="..\:/Users/fatla/Desktop/Capstone/CosAiko/app/src/main/res/drawable/custom_input.xml" value="0.2545" />
-        <entry key="..\:/Users/fatla/Desktop/Capstone/CosAiko/app/src/main/res/drawable/heart_icon.xml" value="0.12" />
-        <entry key="..\:/Users/fatla/Desktop/Capstone/CosAiko/app/src/main/res/drawable/ic_back_button.xml" value="0.2145" />
         <entry key="..\:/Users/fatla/Desktop/Capstone/CosAiko/app/src/main/res/drawable/ic_calendar.xml" value="0.1" />
         <entry key="..\:/Users/fatla/Desktop/Capstone/CosAiko/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.122" />
         <entry key="..\:/Users/fatla/Desktop/Capstone/CosAiko/app/src/main/res/drawable/ic_fire.xml" value="0.1" />
-        <entry key="..\:/Users/fatla/Desktop/Capstone/CosAiko/app/src/main/res/drawable/ic_launcher_background.xml" value="0.196" />
         <entry key="..\:/Users/fatla/Desktop/Capstone/CosAiko/app/src/main/res/drawable/ic_message.xml" value="0.1" />
         <entry key="..\:/Users/fatla/Desktop/Capstone/CosAiko/app/src/main/res/drawable/ic_password.xml" value="0.1525" />
-        <entry key="..\:/Users/fatla/Desktop/Capstone/CosAiko/app/src/main/res/drawable/ic_plus_icon.xml" value="0.118" />
-        <entry key="..\:/Users/fatla/Desktop/Capstone/CosAiko/app/src/main/res/drawable/ic_profile.xml" value="0.2145" />
         <entry key="..\:/Users/fatla/Desktop/Capstone/CosAiko/app/src/main/res/drawable/ic_username.xml" value="0.12" />
         <entry key="..\:/Users/fatla/Desktop/Capstone/CosAiko/app/src/main/res/drawable/rounded_button.xml" value="0.2135" />
-        <entry key="..\:/Users/fatla/Desktop/Capstone/CosAiko/app/src/main/res/drawable/top_bar_button.xml" value="0.12" />
-        <entry key="..\:/Users/fatla/Desktop/Capstone/CosAiko/app/src/main/res/drawable/x_button.xml" value="0.2145" />
         <entry key="..\:/Users/fatla/Desktop/Capstone/CosAiko/app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="..\:/Users/fatla/Desktop/Capstone/CosAiko/app/src/main/res/layout/activity_picture_select.xml" value="0.35082604470359574" />
-        <entry key="..\:/Users/fatla/Desktop/Capstone/CosAiko/app/src/main/res/layout/activity_profile_page.xml" value="0.25" />
         <entry key="..\:/Users/fatla/Desktop/Capstone/CosAiko/app/src/main/res/layout/activity_register.xml" value="0.29259259259259257" />
         <entry key="..\:/Users/fatla/Desktop/Capstone/CosAiko/app/src/main/res/layout/activity_swipe.xml" value="0.2" />
         <entry key="..\:/Users/fatla/Desktop/Capstone/CosAiko/app/src/main/res/layout/activity_swipe_page.xml" value="0.22" />
         <entry key="..\:/Users/fatla/Desktop/Capstone/CosAiko/app/src/main/res/layout/activity_tab_page.xml" value="0.25" />
         <entry key="..\:/Users/fatla/Desktop/Capstone/CosAiko/app/src/main/res/layout/fragment_calendar.xml" value="0.18854166666666666" />
-        <entry key="..\:/Users/fatla/Desktop/Capstone/CosAiko/app/src/main/res/layout/fragment_dashboard.xml" value="0.2" />
+        <entry key="..\:/Users/fatla/Desktop/Capstone/CosAiko/app/src/main/res/layout/fragment_dashboard.xml" value="0.1925925925925926" />
         <entry key="..\:/Users/fatla/Desktop/Capstone/CosAiko/app/src/main/res/layout/fragment_findpeople.xml" value="0.18854166666666666" />
         <entry key="..\:/Users/fatla/Desktop/Capstone/CosAiko/app/src/main/res/layout/fragment_home.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/fatla/Desktop/Capstone/CosAiko/app/src/main/res/layout/fragment_messages.xml" value="0.22" />
@@ -35,10 +32,10 @@
         <entry key="..\:/Users/fatla/Desktop/Capstone/CosAiko/app/src/main/res/layout/fragment_swipe_page.xml" value="0.29791666666666666" />
         <entry key="..\:/Users/fatla/Desktop/Capstone/CosAiko/app/src/main/res/layout/item.xml" value="0.22" />
         <entry key="..\:/Users/fatla/Desktop/Capstone/CosAiko/app/src/main/res/layout/rounded_button.xml" value="0.2421875" />
-        <entry key="..\:/Users/fatla/Desktop/Capstone/CosAiko/app/src/main/res/layout/topbar.xml" value="0.264" />
         <entry key="..\:/Users/fatla/Desktop/Capstone/CosAiko/app/src/main/res/menu-v26/bottom_nav_menu.xml" value="0.30648148148148147" />
         <entry key="..\:/Users/fatla/Desktop/Capstone/CosAiko/app/src/main/res/menu/bottom_menu.xml" value="0.18854166666666666" />
         <entry key="..\:/Users/fatla/Desktop/Capstone/CosAiko/app/src/main/res/menu/bottom_nav_menu.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/mbittle3/Documents/Capstone/Capstone/CosAiko/app/src/main/res/layout/activity_profile_page.xml" value="0.20416666666666666" />
       </map>
     </option>
   </component>
