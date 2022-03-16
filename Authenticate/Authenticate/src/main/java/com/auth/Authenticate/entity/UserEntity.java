@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class UserEntity {
 
     @Column(name = "id", nullable = false, unique = true)
     private Integer id;
@@ -15,24 +15,26 @@ public class User {
     @Column(name = "l_name")
     private String lName;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
 
     @Column(name = "password")
     private String password;
 
     //////// CONSTRUCTORS \\\\\\\\
-    public User() {
+    public UserEntity() {
 
     }
 
-    public User(Integer id, String fName, String lName, String email, String password) {
+    /*
+    public UserEntity(Integer id, String fName, String lName, String email, String password) {
         this.id = id;
         this.fName = fName;
         this.lName = lName;
         this.email = email;
         this.password = password;
     }
+    */
 
     //////// GETTERS \\\\\\\\
     @Id
