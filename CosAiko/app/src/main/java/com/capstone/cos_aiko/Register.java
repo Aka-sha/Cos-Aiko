@@ -69,8 +69,8 @@ public class Register extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Hello Javatpoint", Toast.LENGTH_SHORT).show();
                     Intent tabPage = new Intent(getApplicationContext(), TabPage.class);
                     startActivity(tabPage);
-                } else { // response code 404 (no matching credentials)
-                    Toast.makeText(getApplicationContext(), "Failed to register, try again later.", Toast.LENGTH_SHORT).show();
+                } else { // not successful because email already exists - 400 error code (BAD REQUEST)
+                    Toast.makeText(getApplicationContext(), "Email already exists", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -98,7 +98,7 @@ public class Register extends AppCompatActivity {
         } else if (password == null || password.trim().length() == 0) { // validate password
             Toast.makeText(getApplicationContext(), "Password is required", Toast.LENGTH_SHORT).show();
             return false;
-        } else if(password.trim().length() < 8  || password.trim().length() > 32){ // force password length
+        } else if (password.trim().length() < 8 || password.trim().length() > 32) { // force password length
             Toast.makeText(getApplicationContext(), "Password must be between 8 and 32 characters", Toast.LENGTH_SHORT).show();
             return false;
         } else if (!password.equals(confirmPwd)) {
