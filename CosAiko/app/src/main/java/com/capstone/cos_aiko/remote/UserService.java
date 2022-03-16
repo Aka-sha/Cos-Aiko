@@ -4,11 +4,14 @@ import com.capstone.cos_aiko.model.User;
 
 import java.util.List;
 
+import okhttp3.MultipartBody;
+import okhttp3.Request;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
@@ -22,4 +25,9 @@ public interface UserService {
 
     @GET("/users")
     Call<List<User>> getAllUsers();
+
+    @Multipart
+    @POST("/users/uploadProfileImage")
+    Call<RequestBody> uploadImage(@Part MultipartBody.Part part,
+                                  @Part("data")RequestBody requestBody);
 }
