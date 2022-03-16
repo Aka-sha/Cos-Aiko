@@ -14,11 +14,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.capstone.cos_aiko.remote.ApiUtils;
+import com.capstone.cos_aiko.remote.RetrofitClient;
+import com.capstone.cos_aiko.remote.UserService;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class PictureSelect extends AppCompatActivity {
     private Button addImageButton;
@@ -109,6 +121,29 @@ public class PictureSelect extends AppCompatActivity {
                 break;
             }
         }
+        File imageFile = new File(uri.getPath());
+        RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), imageFile);
+        MultipartBody.Part parts = MultipartBody.Part.createFormData("profileImage", imageFile.getName(), requestBody);
+        RequestBody dataForImage = RequestBody.create(MediaType.parse("text/plain"), "New profile image");
+
+        //Retrofit retrofit = RetrofitClient.getClient();
+        UserService userService = ApiUtils.getUserService();
+
+        Call call = userService.uploadImage(parts, dataForImage);
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+
+            }
+        });
+
+
+
 
     }
 }

@@ -15,6 +15,7 @@ import com.capstone.cos_aiko.remote.UserService;
 
 import java.util.regex.Pattern;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -59,12 +60,12 @@ public class Register extends AppCompatActivity {
 
     private void register(User user) {
         // Make API call with parameter email and password
-        Call<UserResponse> call = userService.createUser(user);
-        call.enqueue(new Callback<UserResponse>() {
+        Call<ResponseBody> call = userService.createUser(user);
+        call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) { // user successfully registered
-                    UserResponse user = response.body();
+                    ResponseBody user = response.body();
                     // login successful
                     Toast.makeText(getApplicationContext(), "Hello Javatpoint", Toast.LENGTH_SHORT).show();
                     Intent tabPage = new Intent(getApplicationContext(), TabPage.class);
