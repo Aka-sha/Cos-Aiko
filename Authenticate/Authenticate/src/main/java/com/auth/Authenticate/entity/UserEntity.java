@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class UserEntity {
 
     @Column(name = "id", nullable = false, unique = true)
     private Integer id;
@@ -15,24 +15,32 @@ public class User {
     @Column(name = "l_name")
     private String lName;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
 
     @Column(name = "password")
     private String password;
 
+    @Column(name = "bio")
+    private String bio;
+
+    @Column(name = "phone")
+    private String phone;
+
     //////// CONSTRUCTORS \\\\\\\\
-    public User() {
+    public UserEntity() {
 
     }
 
-    public User(Integer id, String fName, String lName, String email, String password) {
+    /*
+    public UserEntity(Integer id, String fName, String lName, String email, String password) {
         this.id = id;
         this.fName = fName;
         this.lName = lName;
         this.email = email;
         this.password = password;
     }
+    */
 
     //////// GETTERS \\\\\\\\
     @Id
@@ -57,7 +65,15 @@ public class User {
         return password;
     }
 
-    //////// GETTERS \\\\\\\\
+    public String getBio() {
+        return bio;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    //////// SETTERS \\\\\\\\
     public void setId(Integer id) {
         this.id = id;
     }
@@ -76,6 +92,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     @Override
