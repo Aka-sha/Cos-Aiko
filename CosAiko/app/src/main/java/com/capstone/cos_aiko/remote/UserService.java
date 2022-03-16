@@ -4,6 +4,8 @@ import com.capstone.cos_aiko.model.User;
 import com.capstone.cos_aiko.model.UserResponse;
 
 
+import java.util.List;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -20,7 +22,10 @@ public interface UserService {
     @GET("users/{email}/{password}")
     Call<UserResponse> login(@Path("email") String email, @Path("password") String password);
 
-    // POST method to create new user
-    @POST("users/register")
-    Call<UserResponse> createUser(@Body User user);
+    @POST("/users/newUser")
+    Call<ResponseBody> createUser(@Body User user);
+
+    @GET("/users")
+    Call<List<User>> getAllUsers();
+
 }

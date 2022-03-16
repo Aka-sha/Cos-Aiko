@@ -69,8 +69,8 @@ public class Register extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Hello Javatpoint", Toast.LENGTH_SHORT).show();
                     Intent tabPage = new Intent(getApplicationContext(), TabPage.class);
                     startActivity(tabPage);
-                } else { // not succussfel because email already exists - 400 error code (BAD REQUEST)
-                    Toast.makeText(getApplicationContext(), "Email already exists", Toast.LENGTH_SHORT).show();
+                } else { // response code 404 (no matching credentials)
+                    Toast.makeText(getApplicationContext(), "Failed to register, try again later.", Toast.LENGTH_SHORT).show();
                 }
             }
 
