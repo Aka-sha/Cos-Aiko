@@ -60,12 +60,12 @@ public class Register extends AppCompatActivity {
 
     private void register(User user) {
         // Make API call with parameter email and password
-        Call<ResponseBody> call = userService.createUser(user);
-        call.enqueue(new Callback<ResponseBody>() {
+        Call<UserResponse> call = userService.createUser(user);
+        call.enqueue(new Callback<UserResponse>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                 if (response.isSuccessful()) { // user successfully registered
-                    ResponseBody user = response.body();
+                    UserResponse currUser = response.body();
                     // login successful
                     Toast.makeText(getApplicationContext(), "Hello Javatpoint", Toast.LENGTH_SHORT).show();
                     Intent tabPage = new Intent(getApplicationContext(), TabPage.class);
