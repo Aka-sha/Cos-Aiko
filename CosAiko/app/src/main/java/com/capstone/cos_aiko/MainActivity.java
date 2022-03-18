@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -14,10 +15,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import com.capstone.cos_aiko.model.UserResponse;
 import com.capstone.cos_aiko.remote.ApiUtils;
 import com.capstone.cos_aiko.remote.UserService;
+import com.capstone.cos_aiko.storage.SharedPrefManager;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = MainActivity.class.getSimpleName();
     EditText username;
     EditText password;
     String USERNAME, PASSWORD;
@@ -59,15 +63,23 @@ public class MainActivity extends AppCompatActivity {
 
     private void login(String username, String password) {
         // Make API call with parameter email and password
-        Call<ResponseBody> call = userService.login(username, password);
-        call.enqueue(new Callback<ResponseBody>() {
+        Call<UserResponse> call = userService.login(username, password);
+        call.enqueue(new Callback<UserResponse>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                 // check if credentials matched (response code of 200 = success)
                 if (response.isSuccessful()) {
+                    String email = response.body().getEmail();
                     // login successful
                     Toast.makeText(getApplicationContext(), "Hello Javatpoint", Toast.LENGTH_SHORT).show();
                     Intent tabPage = new Intent(getApplicationContext(), TabPage.class);
+
+                    // save email to shared preferences to manage user session
+                    SharedPrefManager prefManager = new SharedPrefManager();
+                    prefManager.saveEmail(getApplicationContext(), email);
+
+                    Log.d(TAG, "email and saved" + email);
+
                     startActivity(tabPage);
                 } else { // response code 404 (no matching credentials)
                     Toast.makeText(getApplicationContext(), "The username or password is invalid", Toast.LENGTH_SHORT).show();
@@ -79,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
     public void goToRegister(View v){

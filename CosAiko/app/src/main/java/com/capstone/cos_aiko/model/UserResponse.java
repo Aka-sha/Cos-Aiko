@@ -24,6 +24,12 @@ public class UserResponse implements Serializable { // response class for user r
     @SerializedName("email")
     private String email;
 
+    @SerializedName("bio")
+    private String bio;
+
+    @SerializedName("phone")
+    private String phone_number;
+
     public void setLName(String lName) {
         this.lName = lName;
     }
@@ -64,6 +70,22 @@ public class UserResponse implements Serializable { // response class for user r
         return email;
     }
 
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setPhone(String phone) {
+        this.phone_number = phone;
+    }
+
+    public String getPhone_number() {
+        return phone_number;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -72,6 +94,8 @@ public class UserResponse implements Serializable { // response class for user r
                 ", lName='" + lName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", bio='" + bio + '\'' +
+                ", phone_number='" + phone_number + '\'' +
                 '}';
     }
 

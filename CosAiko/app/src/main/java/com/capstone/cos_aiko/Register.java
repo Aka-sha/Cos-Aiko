@@ -15,6 +15,7 @@ import com.capstone.cos_aiko.remote.UserService;
 
 import java.util.regex.Pattern;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -64,12 +65,12 @@ public class Register extends AppCompatActivity {
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                 if (response.isSuccessful()) { // user successfully registered
-                    UserResponse user = response.body();
+                    UserResponse currUser = response.body();
                     // login successful
                     Toast.makeText(getApplicationContext(), "Hello Javatpoint", Toast.LENGTH_SHORT).show();
                     Intent tabPage = new Intent(getApplicationContext(), TabPage.class);
                     startActivity(tabPage);
-                } else { // not succussfel because email already exists - 400 error code (BAD REQUEST)
+                } else { // not successful because email already exists - 400 error code (BAD REQUEST)
                     Toast.makeText(getApplicationContext(), "Email already exists", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -98,7 +99,7 @@ public class Register extends AppCompatActivity {
         } else if (password == null || password.trim().length() == 0) { // validate password
             Toast.makeText(getApplicationContext(), "Password is required", Toast.LENGTH_SHORT).show();
             return false;
-        } else if(password.trim().length() < 8  || password.trim().length() > 32){ // force password length
+        } else if (password.trim().length() < 8 || password.trim().length() > 32) { // force password length
             Toast.makeText(getApplicationContext(), "Password must be between 8 and 32 characters", Toast.LENGTH_SHORT).show();
             return false;
         } else if (!password.equals(confirmPwd)) {

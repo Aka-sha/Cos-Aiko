@@ -26,6 +26,18 @@ public class MainController {
         return service.listAll();
     }
 
+    @GetMapping("/users/email/{email}")
+    public ResponseEntity<UserEntity> findByEmail(@PathVariable String email) { // get user by email
+        try {
+            UserEntity user = service.getByEmail(email);
+            if (user == null) {
+                throw new NoSuchElementException();
+            }
+            return new ResponseEntity<UserEntity>(user, HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<UserEntity>(HttpStatus.NOT_FOUND);
+        }
+    }
 
     @GetMapping("/users/{id}")
     public ResponseEntity<UserEntity> get(@PathVariable Integer id) { // User by ID
@@ -37,18 +49,18 @@ public class MainController {
         }
     }
 
-    @GetMapping("users/{email}/{password}") // User by email AND password - for authentication
-    public ResponseEntity<String> getUserCredentials(@PathVariable String email, @PathVariable String password) {
+    @GetMapping("/users/{email}/{password}") // User by email AND password - for authentication
+    public ResponseEntity<UserEntity> getUserCredentials(@PathVariable String email, @PathVariable String password) {
         try {
             UserEntity user = service.getCredentials(email, password);
             if (user == null) { // user email-password combo doesn't match any records
                 throw new NoSuchElementException();
             }
             // return true and status code (200)
-            return new ResponseEntity<String>("true", HttpStatus.OK);
+            return new ResponseEntity<UserEntity>(user, HttpStatus.OK);
         } catch (NoSuchElementException e) {
             // return true and failure status code
-            return new ResponseEntity<String>("false", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<UserEntity>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -69,7 +81,7 @@ public class MainController {
         try {
             UserEntity existUser = service.get(id);
             service.save(user);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(user, HttpStatus.OK);
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

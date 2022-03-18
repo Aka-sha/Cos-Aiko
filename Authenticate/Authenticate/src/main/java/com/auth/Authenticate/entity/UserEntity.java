@@ -21,6 +21,12 @@ public class UserEntity {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "bio")
+    private String bio;
+
+    @Column(name = "phone")
+    private String phone;
+
     //////// CONSTRUCTORS \\\\\\\\
     public UserEntity() {
 
@@ -59,7 +65,15 @@ public class UserEntity {
         return password;
     }
 
-    //////// GETTERS \\\\\\\\
+    public String getBio() {
+        return bio;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    //////// SETTERS \\\\\\\\
     public void setId(Integer id) {
         this.id = id;
     }
@@ -78,6 +92,14 @@ public class UserEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     @Override

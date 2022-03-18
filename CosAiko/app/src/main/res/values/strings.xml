@@ -40,6 +40,6 @@
     <string name="Find_People">Find_People</string>
     <string name="confirmPassword">Confirm Password</string>
     <string name="Email">Email Address</string>
-    <string name="fname">fname</string>
-    <string name="lname">lname</string>
+    <string name="fname">First name</string>
+    <string name="lname">Last name</string>
 </resources>
