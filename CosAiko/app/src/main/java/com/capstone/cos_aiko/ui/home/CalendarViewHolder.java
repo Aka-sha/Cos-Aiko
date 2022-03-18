@@ -1,10 +1,13 @@
-package com.capstone.cos_aiko;
+package com.capstone.cos_aiko.ui.home;
 
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.capstone.cos_aiko.R;
+import com.capstone.cos_aiko.ui.home.CalendarAdapter;
 
 public class CalendarViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     public final TextView dayOfMonth;
