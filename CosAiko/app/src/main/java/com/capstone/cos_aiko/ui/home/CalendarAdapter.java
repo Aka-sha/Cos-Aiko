@@ -1,4 +1,4 @@
-package com.capstone.cos_aiko;
+package com.capstone.cos_aiko.ui.home;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.capstone.cos_aiko.R;
 
 import java.util.ArrayList;
 

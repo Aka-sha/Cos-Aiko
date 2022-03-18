@@ -32,5 +32,4 @@ public class TabPage extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_tab_page);
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
-
 }
