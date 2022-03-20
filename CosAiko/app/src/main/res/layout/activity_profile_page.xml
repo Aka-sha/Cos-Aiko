@@ -29,16 +29,6 @@
             android:src="@drawable/defaultprofile"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"/>
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Garrett"
-            android:textSize="20sp"
-
-
-            android:includeFontPadding="false"
-            android:layout_marginLeft="10dp" />
     </androidx.cardview.widget.CardView>
 
 

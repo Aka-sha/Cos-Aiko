@@ -3,10 +3,14 @@ package com.capstone.cos_aiko;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,10 +25,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ProfilePage extends AppCompatActivity {
-    Button addPicturesButton, loginBtn;
+    Button addPicturesButton, logoutBtn;
     private String FNAME, LNAME, NAME, EMAIL, BIO, PHONE;
     TextView mName, mEmail, mBio, mPhone;
     UserService userService;
+    ImageView profileImg;
 
 
     @Override
@@ -37,10 +42,13 @@ public class ProfilePage extends AppCompatActivity {
         mPhone = findViewById(R.id.profile_phone);
         mBio = findViewById(R.id.profile_bio);
         userService = ApiUtils.getUserService();
+        profileImg = findViewById(R.id.profile_pic);
 
+        // get email of current user for API call
         SharedPrefManager prefManager = new SharedPrefManager();
         EMAIL = prefManager.getEmail(getApplicationContext());
 
+        // get user information to display on user profile
         getUserDetail();
 
         addPicturesButton = (Button) findViewById(R.id.add_pic);
@@ -52,13 +60,16 @@ public class ProfilePage extends AppCompatActivity {
             }
         });
 
-        loginBtn = findViewById(R.id.logout_btn);
-        loginBtn.setOnClickListener(new View.OnClickListener() {
+        // set listener for logout button
+        logoutBtn = findViewById(R.id.logout_btn);
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // call endSession function which clears preferences (logout)
                 prefManager.endSession(getApplicationContext());
                 String string = prefManager.getEmail(getApplicationContext());
                 Toast.makeText(getApplicationContext(), "Successfully Logged Out", Toast.LENGTH_SHORT).show();
+                // redirect to login page
                 Intent login = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(login);
             }
@@ -67,13 +78,15 @@ public class ProfilePage extends AppCompatActivity {
     }
 
     private void getUserDetail() {
+        // API call to get user by email key
         Call<UserResponse> call = userService.findByEmail(EMAIL);
         call.enqueue(new Callback<UserResponse>() {
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-                // check if credentials matched (response code of 200 = success)
-                if (response.isSuccessful()) {
+                if (response.isSuccessful()) { // successfully obtained user information
                     UserResponse user = response.body();
+
+                    // set fields for user profile
                     FNAME = user.getFName();
                     LNAME = user.getLName();
                     NAME = FNAME + " " + LNAME;
@@ -81,12 +94,23 @@ public class ProfilePage extends AppCompatActivity {
                     PHONE = user.getPhone_number();
                     BIO = user.getBio();
 
+                    // inject fields onto profile page for viewing
                     mName.setText(NAME);
                     mEmail.setText(EMAIL);
                     mPhone.setText(PHONE);
                     mBio.setText(BIO);
 
-                } else { // response code 404 (no matching credentials)
+                    // check if user has a profile picture - if not, profile picture will remain as default image
+                    if (user.getImage() != null) {
+                        // decode string
+                        byte[] imageBytes = Base64.decode(user.getImage(), Base64.DEFAULT);
+                        // create bitmap for image
+                        Bitmap bmp = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+                        // set profile image
+                        profileImg.setImageBitmap(bmp);
+                    }
+
+                } else { // unable to upload image
                     Toast.makeText(getApplicationContext(), response.errorBody().toString(), Toast.LENGTH_SHORT).show();
                 }
             }

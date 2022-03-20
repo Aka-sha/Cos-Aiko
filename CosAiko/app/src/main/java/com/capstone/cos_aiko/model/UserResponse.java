@@ -30,6 +30,9 @@ public class UserResponse implements Serializable { // response class for user r
     @SerializedName("phone")
     private String phone_number;
 
+    @SerializedName("image")
+    private String image;
+
     public void setLName(String lName) {
         this.lName = lName;
     }
@@ -84,6 +87,14 @@ public class UserResponse implements Serializable { // response class for user r
 
     public String getPhone_number() {
         return phone_number;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getImage() {
+        return image;
     }
 
     @Override
