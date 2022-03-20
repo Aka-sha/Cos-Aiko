@@ -27,6 +27,10 @@ public class UserEntity {
     @Column(name = "phone")
     private String phone;
 
+    @Lob
+    @Column(name = "image")
+    private byte[] image;
+
     //////// CONSTRUCTORS \\\\\\\\
     public UserEntity() {
 
@@ -73,6 +77,8 @@ public class UserEntity {
         return phone;
     }
 
+    public byte[] getImage() { return image; }
+
     //////// SETTERS \\\\\\\\
     public void setId(Integer id) {
         this.id = id;
@@ -101,6 +107,8 @@ public class UserEntity {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+    public void setImage(byte[] image) { this.image = image; }
 
     @Override
     public String toString() {

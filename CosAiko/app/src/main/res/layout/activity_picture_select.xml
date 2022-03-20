@@ -7,96 +7,102 @@
     tools:context=".PictureSelect">
 
     <GridLayout
+        android:id="@+id/gridLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:rowCount="2"
-        android:columnCount="2">
+        android:columnCount="2"
+        android:rowCount="2">
 
         <androidx.cardview.widget.CardView>
+
             <ImageView
                 android:id="@+id/x_button_image1"
-                android:tag="0"
                 android:layout_width="50px"
                 android:layout_height="50px"
-                android:src="@drawable/x_button"
                 android:layout_gravity="bottom"
                 android:layout_marginLeft="340px"
-                android:visibility="invisible">
-            </ImageView>
+                android:src="@drawable/x_button"
+                android:tag="0"
+                android:visibility="invisible"></ImageView>
+
             <ImageView
                 android:id="@+id/profile_image_1"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:visibility="invisible"
-                ></ImageView>
+                app:layout_constraintTop_toTopOf="parent"></ImageView>
         </androidx.cardview.widget.CardView>
+
         <androidx.cardview.widget.CardView>
+
             <ImageView
                 android:id="@+id/x_button_image2"
-                android:tag="1"
                 android:layout_width="50px"
                 android:layout_height="50px"
-                android:src="@drawable/x_button"
                 android:layout_gravity="bottom"
                 android:layout_marginLeft="340px"
-                android:visibility="invisible">
-            </ImageView>
+                android:src="@drawable/x_button"
+                android:tag="1"
+                android:visibility="invisible"></ImageView>
+
             <ImageView
                 android:id="@+id/profile_image_2"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:visibility="invisible"
-                ></ImageView>
+                app:layout_constraintTop_toTopOf="parent"></ImageView>
         </androidx.cardview.widget.CardView>
+
         <androidx.cardview.widget.CardView>
+
             <ImageView
                 android:id="@+id/x_button_image3"
-                android:tag="2"
                 android:layout_width="50px"
                 android:layout_height="50px"
-                android:src="@drawable/x_button"
                 android:layout_gravity="bottom"
                 android:layout_marginLeft="340px"
+                android:src="@drawable/x_button"
+                android:tag="2"
                 android:visibility="invisible"></ImageView>
+
             <ImageView
                 android:id="@+id/profile_image_3"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:visibility="invisible"
-                ></ImageView>
+                app:layout_constraintTop_toTopOf="parent"></ImageView>
         </androidx.cardview.widget.CardView>
+
         <androidx.cardview.widget.CardView>
+
             <ImageView
                 android:id="@+id/x_button_image4"
-                android:tag="3"
                 android:layout_width="50px"
                 android:layout_height="50px"
-                android:src="@drawable/x_button"
                 android:layout_gravity="bottom"
                 android:layout_marginLeft="340px"
+                android:src="@drawable/x_button"
+                android:tag="3"
                 android:visibility="invisible"></ImageView>
+
             <ImageView
                 android:id="@+id/profile_image_4"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:visibility="invisible"
-                ></ImageView>
+                app:layout_constraintTop_toTopOf="parent"></ImageView>
         </androidx.cardview.widget.CardView>
     </GridLayout>
 
@@ -115,4 +121,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.952"></com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+    <Button
+        android:id="@+id/saveImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save Image"
+        android:textColor="@color/black"
+        app:backgroundTint="#E1D462"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/gridLayout2"
+        app:layout_constraintHorizontal_bias="0.09"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.95" />
 </androidx.constraintlayout.widget.ConstraintLayout>

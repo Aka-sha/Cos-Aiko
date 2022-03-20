@@ -1,5 +1,6 @@
 package com.auth.Authenticate.controller;
 
+import java.io.IOException;
 import java.util.*;
 
 import com.auth.Authenticate.data.UserDto;
@@ -8,6 +9,7 @@ import com.auth.Authenticate.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping
@@ -84,6 +86,28 @@ public class MainController {
             return new ResponseEntity<>(user, HttpStatus.OK);
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PutMapping("users/updateProfileImage/{email}") // update user profile image
+    public ResponseEntity<UserEntity> updateProfileImage(@RequestPart(name = "img")MultipartFile img, @PathVariable String email){
+        UserEntity user = service.getByEmail(email); // get user information
+
+        if(user == null){ // check if email is valid (exists)
+            return new ResponseEntity<UserEntity>(HttpStatus.NOT_FOUND);
+        }
+
+        try{
+            // get bytes from image for storage in DB
+            byte[] imgBytes = img.getBytes();
+            // set the new user image
+            user.setImage(imgBytes);
+            // save updated information for user
+            service.save(user);
+            return new ResponseEntity<UserEntity>(user, HttpStatus.OK);
+        }catch(IOException e){
+            // unable to handle file
+            return new ResponseEntity<UserEntity>(HttpStatus.CONFLICT);
         }
     }
 
