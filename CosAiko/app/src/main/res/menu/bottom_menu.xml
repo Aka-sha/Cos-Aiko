@@ -9,6 +9,6 @@
         android:icon="@drawable/ic_fire"/>
     <item android:title="Item"
         android:id="@+id/messages"
-        android:icon="@drawable/ic_message"/>
+        android:icon="@drawable/ic_calendar"/>
 
 </menu>

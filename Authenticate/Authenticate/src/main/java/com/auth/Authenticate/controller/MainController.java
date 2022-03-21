@@ -65,7 +65,7 @@ public class MainController {
     }
 
     // CREATE (POST) \\
-    @PostMapping("/users/register") // create new user account
+    @PostMapping("/users/newUser") // create new user account
     public ResponseEntity<UserEntity> register(@RequestBody final UserDto userData) {
         if (service.checkEmailExists(userData.getEmail())) { // email already exists
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
