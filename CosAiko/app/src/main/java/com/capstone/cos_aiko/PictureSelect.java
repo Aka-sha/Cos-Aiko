@@ -13,10 +13,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.capstone.cos_aiko.model.UserResponse;
 import com.capstone.cos_aiko.remote.ApiUtils;
 import com.capstone.cos_aiko.remote.RetrofitClient;
 import com.capstone.cos_aiko.remote.UserService;
+import com.capstone.cos_aiko.storage.SharedPrefManager;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -33,7 +36,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class PictureSelect extends AppCompatActivity {
-    private Button addImageButton;
+    private Button addImageButton, saveImgBtn;
     private FloatingActionButton fab;
     private ImageView firstImage;
     private ImageView secondImage;
@@ -49,6 +52,8 @@ public class PictureSelect extends AppCompatActivity {
     private List<ImageView> xButtonList;
 
     List<PictureListContainer> listContainer;
+    UserService userService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +62,10 @@ public class PictureSelect extends AppCompatActivity {
         secondImage = (ImageView) findViewById(R.id.profile_image_2);
         thirdImage = (ImageView) findViewById(R.id.profile_image_3);
         fourthImage = (ImageView) findViewById(R.id.profile_image_4);
+        saveImgBtn = findViewById(R.id.saveImg);
+
+        // initialize userService for API calls
+        userService = ApiUtils.getUserService();
 
         imageList = new ArrayList<ImageView>();
         imageList.add(firstImage);
@@ -76,14 +85,14 @@ public class PictureSelect extends AppCompatActivity {
         xButtonList.add(xButtonFour);
 
         listContainer = new ArrayList<>();
-        for (int i =0; i < imageList.size(); i++){
+        for (int i = 0; i < imageList.size(); i++) {
 
             PictureListContainer listCont = new
                     PictureListContainer(imageList.get(i), xButtonList.get(i), i);
             listContainer.add(listCont);
         }
 
-        for (int i=0; i < xButtonList.size(); i++){
+        for (int i = 0; i < xButtonList.size(); i++) {
             xButtonList.get(i).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -113,37 +122,51 @@ public class PictureSelect extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         Uri uri = data.getData();
 
-        for ( PictureListContainer curr : listContainer ){
-            if (curr.getImage().getVisibility() == View.INVISIBLE){
+        for (PictureListContainer curr : listContainer) {
+            if (curr.getImage().getVisibility() == View.INVISIBLE) {
                 curr.getxButton().setVisibility(View.VISIBLE);
                 curr.getImage().setVisibility(View.VISIBLE);
                 curr.getImage().setImageURI(uri);
                 break;
             }
         }
-        File imageFile = new File(uri.getPath());
-        RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), imageFile);
-        MultipartBody.Part parts = MultipartBody.Part.createFormData("profileImage", imageFile.getName(), requestBody);
-        RequestBody dataForImage = RequestBody.create(MediaType.parse("text/plain"), "New profile image");
 
-        //Retrofit retrofit = RetrofitClient.getClient();
-        UserService userService = ApiUtils.getUserService();
-
-        Call call = userService.uploadImage(parts, dataForImage);
-        call.enqueue(new Callback() {
+        // set listener for save image button
+        saveImgBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(Call call, Response response) {
+            public void onClick(View view) {
+                // get image file path
+                File imageFile = new File(uri.getPath());
+                RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), imageFile);
+                MultipartBody.Part parts = MultipartBody.Part.createFormData("img", imageFile.getName(), requestBody);
 
-            }
+                // get email key of current user
+                SharedPrefManager pref = new SharedPrefManager();
+                String email = pref.getEmail(getApplicationContext());
 
-            @Override
-            public void onFailure(Call call, Throwable t) {
+                // upload image to API
+                Call<UserResponse> call = userService.updateImage(parts, email);
+                call.enqueue(new Callback<UserResponse>() {
+                    @Override
+                    public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+                        if (response.isSuccessful()) { // user profile image successfully updated
+                            UserResponse user = response.body();
+                            Toast.makeText(getApplicationContext(), "Profile successfully updated", Toast.LENGTH_SHORT).show();
+                            // go to profile page to view changes
+                            Intent profile = new Intent(getApplicationContext(), ProfilePage.class);
+                            startActivity(profile);
+                        } else { // unable to upload image
+                            Toast.makeText(getApplicationContext(), "Unable to process request", Toast.LENGTH_SHORT).show();
+                        }
+                    }
 
+                    @Override
+                    public void onFailure(Call call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
-
-
-
 
     }
 }

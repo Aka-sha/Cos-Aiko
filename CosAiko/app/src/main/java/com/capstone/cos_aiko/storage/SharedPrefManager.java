@@ -24,7 +24,7 @@ public class SharedPrefManager { // manage user session using SharedPreferences
         editor.apply(); // save email to shared preferences
     }
 
-    public String getEmail(Context context) {
+    public String getEmail(Context context) { // retrieve email value
         String data;
         SharedPreferences preferences;
         preferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
@@ -32,7 +32,7 @@ public class SharedPrefManager { // manage user session using SharedPreferences
         return data;
     }
 
-    public void endSession(Context context){
+    public void endSession(Context context){ // clear preferences - logout current user
         SharedPreferences preferences;
         SharedPreferences.Editor editor;
         preferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
