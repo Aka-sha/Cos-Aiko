@@ -1,5 +1,10 @@
 package com.auth.Authenticate.security;
 
+/**
+ * This AppSecurityConfig class sets up the desired security configurations
+ * for this application (i.e, BCrypt password hashing)
+ */
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -17,7 +22,6 @@ import javax.annotation.Resource;
 @EnableWebSecurity
 public class AppSecurityConfig extends WebSecurityConfigurerAdapter { // controller -> service ->  DAO
     @Resource(name = "myUserDetailService")
-
     private UserDetailsService userDetailsService;
 
     @Override

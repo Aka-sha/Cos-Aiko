@@ -1,5 +1,10 @@
 package com.auth.Authenticate.entity;
 
+/**
+ * This EventEntity class performs the Object Relational Mapping (ORM)
+ * to the events table in our MySQL database.
+ */
+
 import javax.persistence.*;
 import java.sql.Time;
 

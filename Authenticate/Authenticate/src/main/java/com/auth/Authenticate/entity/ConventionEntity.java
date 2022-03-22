@@ -1,5 +1,10 @@
 package com.auth.Authenticate.entity;
 
+/**
+ * This ConventionEntity class performs the Object Relational Mapping (ORM)
+ * to the convention table in our MySQL database.
+ */
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 

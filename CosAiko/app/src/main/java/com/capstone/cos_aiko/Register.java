@@ -58,6 +58,11 @@ public class Register extends AppCompatActivity {
         }
     }
 
+    /**
+     * This function handles the asynchronous call to the REST Api to create a new user account
+     *
+     * @param user user attempting registration
+     */
     private void register(User user) {
         // Make API call with parameter email and password
         Call<UserResponse> call = userService.createUser(user);
@@ -82,7 +87,16 @@ public class Register extends AppCompatActivity {
         });
     }
 
-    // check entered information
+    /**
+     * This function checks whether or not all fields are empty
+     *
+     * @param fName given first name
+     * @param lName given last name
+     * @param username given email
+     * @param password chosen password
+     * @param confirmPwd
+     * @return true if all field contain text, false otherwise
+     */
     private boolean validateSignUp(String fName, String lName, String username, String password, String confirmPwd) {
         if (fName == null || fName.trim().length() == 0) { // validate first name
             Toast.makeText(getApplicationContext(), "First Name is required", Toast.LENGTH_SHORT).show();
@@ -110,6 +124,13 @@ public class Register extends AppCompatActivity {
         }
     }
 
+    /**
+     * This function makes sure that the given email is valid by
+     * comparing it with a regular expression
+     *
+     * @param email email to check
+     * @return false if email does not meet standards or if email is null, true otherwise
+     */
     private boolean checkValidFormat(String email) { // check email format
         String emailRegex = "^(?=.{1,50}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
                 + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,7})$";

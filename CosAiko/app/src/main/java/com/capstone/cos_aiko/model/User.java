@@ -1,5 +1,10 @@
 package com.capstone.cos_aiko.model;
 
+/**
+ *  This class is used to create a new user account for CosAiko
+ *  with the most important fields. Used as a DTO for the Api calls
+ */
+
 public class User {
     private String fName;
 

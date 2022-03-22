@@ -47,6 +47,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * This function check whether or not the input on the login screen is empty
+     *
+     * @param username email field
+     * @param password password field
+     * @return true if either field is empty, false if both fields contain text
+     */
     private boolean validateLogin(String username, String password) {
         // check if username field is empty
         if (username == null || username.trim().length() == 0) {
@@ -61,6 +68,12 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * This function allows the user to attempt a login
+     *
+     * @param username given email
+     * @param password given password
+     */
     private void login(String username, String password) {
         // Make API call with parameter email and password
         Call<UserResponse> call = userService.login(username, password);
