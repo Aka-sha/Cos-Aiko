@@ -1,5 +1,9 @@
 package com.auth.Authenticate.dao;
 
+/**
+ * The Data Object Layer (DAO) handles the database queries for the USERS table
+ */
+
 import com.auth.Authenticate.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

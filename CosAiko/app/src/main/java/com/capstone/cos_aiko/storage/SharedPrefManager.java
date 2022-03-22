@@ -1,5 +1,9 @@
 package com.capstone.cos_aiko.storage;
 
+/*
+    This class is used to handle the current users session on CosAiko
+ */
+
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -14,7 +18,12 @@ public class SharedPrefManager { // manage user session using SharedPreferences
 
     }
 
-    // save email to shared preferences
+    /**
+     * save email to shared preferences
+     *
+     * @param context application context
+     * @param data data being stored as SharedPreference
+     */
     public void saveEmail(Context context, String data) {
         SharedPreferences preferences;
         SharedPreferences.Editor editor;
@@ -24,7 +33,13 @@ public class SharedPrefManager { // manage user session using SharedPreferences
         editor.apply(); // save email to shared preferences
     }
 
-    public String getEmail(Context context) { // retrieve email value
+    /**
+     * retrieve email value
+     *
+     * @param context application context
+     * @return the email of the current user
+     */
+    public String getEmail(Context context) {
         String data;
         SharedPreferences preferences;
         preferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
@@ -32,7 +47,12 @@ public class SharedPrefManager { // manage user session using SharedPreferences
         return data;
     }
 
-    public void endSession(Context context){ // clear preferences - logout current user
+    /**
+     * clear preferences - logout current user
+     *
+     * @param context application context
+     */
+    public void endSession(Context context){
         SharedPreferences preferences;
         SharedPreferences.Editor editor;
         preferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);

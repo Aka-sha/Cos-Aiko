@@ -1,5 +1,11 @@
 package com.auth.Authenticate.data;
 
+/**
+ * The class is used as a Data Transfer Object (DTO) for user creation. This class has the
+ * attributes that are required upon user registration (first name, last name, email, password)
+ * This is used so that we can potentially avoid exposing sensitive information
+ */
+
 public class UserDto {
     private String fName;
     private String lName;

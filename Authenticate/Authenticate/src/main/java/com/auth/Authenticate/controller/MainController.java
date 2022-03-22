@@ -1,5 +1,12 @@
 package com.auth.Authenticate.controller;
 
+/**
+ * This is a controller class with endpoints for the USERS table in our MySQL database.
+ * Any CRUD operation performed to this table by the CosAiko application will be routed
+ * via this MainController class
+ */
+
+
 import java.io.IOException;
 import java.util.*;
 
@@ -23,14 +30,27 @@ public class MainController {
     // CRUD Operations
 
     // READ (GET) \\
+
+    /**
+     * This function returns a list of all current users
+     *
+     * @return list of all current users
+     */
     @GetMapping("/users")
     public List<UserEntity> list() { // All users
         return service.listAll();
     }
 
+    /**
+     * This function gets a user from DB by their unique email
+     *
+     * @param email users email
+     * @return user and httpstatus code (OK = 200 or NOT_FOUND = 404)
+     */
     @GetMapping("/users/email/{email}")
     public ResponseEntity<UserEntity> findByEmail(@PathVariable String email) { // get user by email
         try {
+            // check if users email exists
             UserEntity user = service.getByEmail(email);
             if (user == null) {
                 throw new NoSuchElementException();
@@ -41,8 +61,14 @@ public class MainController {
         }
     }
 
+    /**
+     * This function selects a user by their unique id
+     *
+     * @param id users id
+     * @return user and httpstatus code (OK = 200 or NOT_FOUND = 404)
+     */
     @GetMapping("/users/{id}")
-    public ResponseEntity<UserEntity> get(@PathVariable Integer id) { // User by ID
+    public ResponseEntity<UserEntity> get(@PathVariable Integer id) { // get user by ID
         try {
             UserEntity user = service.get(id);
             return new ResponseEntity<UserEntity>(user, HttpStatus.OK);
@@ -51,7 +77,15 @@ public class MainController {
         }
     }
 
-    @GetMapping("/users/{email}/{password}") // User by email AND password - for authentication
+    /**
+     * This function checks whether the given email/password combination
+     * matches any existing user
+     *
+     * @param email attempted login email
+     * @param password attempted login password
+     * @return
+     */
+    @GetMapping("/users/{email}/{password}") // get user by email AND password - for authentication
     public ResponseEntity<UserEntity> getUserCredentials(@PathVariable String email, @PathVariable String password) {
         try {
             UserEntity user = service.getCredentials(email, password);
@@ -67,6 +101,14 @@ public class MainController {
     }
 
     // CREATE (POST) \\
+
+    /**
+     * This function creates a new user account
+     *
+     * @param userData a object containing user information (first name, last name, email, password)
+     *                 set by the user when creating an account
+     * @return user and http status code (OK = 200 or BAD_REQUEST = 400)
+     */
     @PostMapping("/users/register") // create new user account
     public ResponseEntity<UserEntity> register(@RequestBody final UserDto userData) {
         if (service.checkEmailExists(userData.getEmail())) { // email already exists
@@ -78,6 +120,14 @@ public class MainController {
     }
 
     // UPDATE (PUT) \\
+
+    /**
+     * This function updates the users table by unique id
+     *
+     * @param user user to update
+     * @param id id of user to update
+     * @return user and httpstatus code (OK = 200 or NOT_FOUND = 404)
+     */
     @PutMapping("/users/{id}") // update user by ID
     public ResponseEntity<?> update(@RequestBody UserEntity user, @PathVariable Integer id) {
         try {
@@ -89,6 +139,13 @@ public class MainController {
         }
     }
 
+    /**
+     * This function updates the users profile image
+     *
+     * @param img the updated user profile image
+     * @param email the unique email of the user
+     * @return user and httpstatus code (OK = 200 or NOT_FOUND = 404)
+     */
     @PutMapping("users/updateProfileImage/{email}") // update user profile image
     public ResponseEntity<UserEntity> updateProfileImage(@RequestPart(name = "img")MultipartFile img, @PathVariable String email){
         UserEntity user = service.getByEmail(email); // get user information
@@ -112,6 +169,12 @@ public class MainController {
     }
 
     // DELETE (DELETE) \\
+
+    /**
+     * This function deletes from the users table by id
+     *
+     * @param id users id
+     */
     @DeleteMapping("/users/{id}") // delete user by ID
     public void delete(@PathVariable Integer id) {
         service.delete(id);
