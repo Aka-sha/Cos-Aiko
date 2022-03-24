@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,12 +20,15 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.bumptech.glide.Glide;
 import com.capstone.cos_aiko.R;
 import com.capstone.cos_aiko.TabPage;
 import com.capstone.cos_aiko.databinding.FragmentDashboardBinding;
 import com.capstone.cos_aiko.model.User;
+import com.capstone.cos_aiko.model.UserResponse;
 import com.capstone.cos_aiko.remote.ApiUtils;
 import com.capstone.cos_aiko.remote.UserService;
+import com.capstone.cos_aiko.util.ImageCardAdapter;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.io.IOException;
@@ -43,7 +47,8 @@ public class SwipePageFragment extends Fragment {
     private FragmentDashboardBinding binding;
     private SwipeFlingAdapterView swipeFlingAdapterView;
     private UserService userService;
-    private List<User> userDataList;
+    private ArrayList<UserResponse> userDataList;
+    private ImageCardAdapter cardAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -56,10 +61,13 @@ public class SwipePageFragment extends Fragment {
         userDataList = new ArrayList<>();
         final TextView textView = binding.textDashboard;
         swipePageViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        Call<List<User>> userData = userService.getAllUsers();
+        Call<List<UserResponse>> userData = userService.getAllUsersReponse();
+
+        //Image adapter
+        cardAdapter = new ImageCardAdapter(userDataList, getContext());
 
         userNameList = new ArrayList<String>();
-        arrayAdapter = new ArrayAdapter<String>(root.getContext(), R.layout.item, R.id.helloText, userNameList);
+        //arrayAdapter = new ArrayAdapter<String>(root.getContext(), R.layout.item, R.id.helloText, userNameList);
         Activity activity = getActivity();
         Button leftButton = (Button) root.findViewById(R.id.left);
         leftButton.setOnClickListener(new View.OnClickListener() {
@@ -79,9 +87,9 @@ public class SwipePageFragment extends Fragment {
                 Log.d("left button", "clicked");
             }
         });
-        userData.enqueue(new Callback<List<User>>() {
+        userData.enqueue(new Callback<List<UserResponse>>() {
             @Override
-            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+            public void onResponse(Call<List<UserResponse>> call, Response<List<UserResponse>> response) {
                 if (response.isSuccessful()) {
                     // User data request successful
                     Log.d("getAllUsers" , "Response success");
@@ -90,12 +98,12 @@ public class SwipePageFragment extends Fragment {
                         @Override
                         public void run() {
                             userDataList.clear();
-                            for (User user : response.body()){
+                            for (UserResponse user : response.body()){
                                 userDataList.add(user);
-                                userNameList.add(user.getfName());
+                                //userNameList.add(user.getfName());
                             }
-
-                            arrayAdapter.notifyDataSetChanged();
+                            cardAdapter.notifyDataSetChanged();
+                            //arrayAdapter.notifyDataSetChanged();
                             createSwipeView();
                         }
                     });
@@ -106,7 +114,7 @@ public class SwipePageFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<User>> call, Throwable t) {
+            public void onFailure(Call<List<UserResponse>> call, Throwable t) {
                 Log.d("getAllUsers" , "Response failure");
             }
         });
@@ -121,13 +129,14 @@ public class SwipePageFragment extends Fragment {
         swipeFlingAdapterView = (SwipeFlingAdapterView) root.findViewById(R.id.frame);
 
 
-        swipeFlingAdapterView.setAdapter(arrayAdapter);
+        swipeFlingAdapterView.setAdapter(cardAdapter);
 
         swipeFlingAdapterView.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
             @Override
             public void removeFirstObjectInAdapter() {
-                userNameList.remove(0);
-                arrayAdapter.notifyDataSetChanged();
+                userDataList.remove(0);
+                cardAdapter.notifyDataSetChanged();
+                //arrayAdapter.notifyDataSetChanged();
             }
 
             @Override

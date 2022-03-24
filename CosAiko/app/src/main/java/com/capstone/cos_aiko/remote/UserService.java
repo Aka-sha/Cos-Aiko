@@ -35,6 +35,9 @@ public interface UserService {
     @GET("/users")
     Call<List<User>> getAllUsers();
 
+    @GET("/users")
+    Call<List<UserResponse>> getAllUsersReponse();
+
     // PUT method to update user profile image
     @PUT("users/updateProfileImage/{email}")
     @Multipart

@@ -4,7 +4,7 @@ public class ApiUtils {
     // url to RESTful API
 
     //public static final String BASE_URL = "http://152.13.76.10:8080/";
-    public static final String BASE_URL = "http://192.168.1.86:8080/"; //akasha
+    public static final String BASE_URL = "http://192.168.1.2:8080/"; //akasha
 
     public static UserService getUserService() {
         // create retrofit client
