@@ -72,9 +72,9 @@ public class Register extends AppCompatActivity {
                 if (response.isSuccessful()) { // user successfully registered
                     UserResponse currUser = response.body();
                     // login successful
-                    Toast.makeText(getApplicationContext(), "Hello Javatpoint", Toast.LENGTH_SHORT).show();
-                    Intent tabPage = new Intent(getApplicationContext(), TabPage.class);
-                    startActivity(tabPage);
+                    Toast.makeText(getApplicationContext(), "Account successfully created. You may now login", Toast.LENGTH_SHORT).show();
+                    Intent login = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(login);
                 } else { // not successful because email already exists - 400 error code (BAD REQUEST)
                     Toast.makeText(getApplicationContext(), "Email already exists", Toast.LENGTH_SHORT).show();
                 }
