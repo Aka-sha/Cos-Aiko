@@ -15,8 +15,6 @@
     <string name="tab_text_2">Tab 2</string>
 
     <!--CALENDAR-->
-    <string name="left">(-</string>
-    <string name="right">)-</string>
     <string name="month_year">mar 2022</string>
     <string name="weekday0">SUN</string>
     <string name="weekday1">MON</string>
@@ -26,6 +24,12 @@
     <string name="weekday5">FRI</string>
     <string name="weekday6">SAT</string>
     <string name="day1">1</string>
+    <string name="day2">2</string>
+    <string name="day3">3</string>
+    <string name="day4">4</string>
+    <string name="day5">5</string>
+    <string name="day6">6</string>
+
 
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -42,4 +46,5 @@
     <string name="Email">Email Address</string>
     <string name="fname">First name</string>
     <string name="lname">Last name</string>
+    <string name="prev_month">TODO</string>
 </resources>
