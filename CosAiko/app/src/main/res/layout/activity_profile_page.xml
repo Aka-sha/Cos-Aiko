@@ -40,25 +40,18 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="20dp"
+    android:gravity="center"
+    android:orientation="vertical"
     android:layout_marginTop="-70dp"
     android:backgroundTint="@color/material_on_surface_emphasis_medium">
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/bio_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/password"
-        android:backgroundTint="#d6dc1c"
-        android:text="Change Bio"
-        android:textColor="#69707a"
-        app:layout_constraintVertical_bias="0.0" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/add_pic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/password"
         android:backgroundTint="#d6dc1c"
-        android:text="Add Pictures"
-        android:layout_marginLeft="100dp"
+        android:text="Change Picture"
         android:textColor="#69707a"
         app:layout_constraintVertical_bias="0.0" />
 

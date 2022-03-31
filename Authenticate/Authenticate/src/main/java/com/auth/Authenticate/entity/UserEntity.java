@@ -1,5 +1,10 @@
 package com.auth.Authenticate.entity;
 
+/**
+ * This UserEntity class performs the Object Relational Mapping (ORM)
+ * to the users table in our MySQL database.
+ */
+
 import javax.persistence.*;
 
 @Entity

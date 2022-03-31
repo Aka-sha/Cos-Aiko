@@ -1,5 +1,10 @@
 package com.capstone.cos_aiko.model;
 
+/**
+ * This class maps to the UserEntity in the REST Api. This class
+ * converts the JSON returned from the Api into a Java Object.
+ */
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;

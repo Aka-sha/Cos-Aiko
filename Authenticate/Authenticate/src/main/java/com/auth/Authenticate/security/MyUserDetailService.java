@@ -1,5 +1,10 @@
 package com.auth.Authenticate.security;
 
+/**
+ * This MyUserDetailService is used to retrieve the user's authentication
+ * and authorization information
+ */
+
 import com.auth.Authenticate.dao.UserRepository;
 import com.auth.Authenticate.entity.UserEntity;
 import org.springframework.security.core.userdetails.User;

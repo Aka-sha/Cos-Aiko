@@ -77,6 +77,9 @@ public class ProfilePage extends AppCompatActivity {
 
     }
 
+    /**
+     * This function populates the user's profile with their information
+     */
     private void getUserDetail() {
         // API call to get user by email key
         Call<UserResponse> call = userService.findByEmail(EMAIL);
