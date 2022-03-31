@@ -67,7 +67,6 @@ public class SwipePageFragment extends Fragment {
         cardAdapter = new ImageCardAdapter(userDataList, getContext());
 
         userNameList = new ArrayList<String>();
-        //arrayAdapter = new ArrayAdapter<String>(root.getContext(), R.layout.item, R.id.helloText, userNameList);
         Activity activity = getActivity();
         Button leftButton = (Button) root.findViewById(R.id.left);
         leftButton.setOnClickListener(new View.OnClickListener() {
@@ -100,10 +99,8 @@ public class SwipePageFragment extends Fragment {
                             userDataList.clear();
                             for (UserResponse user : response.body()){
                                 userDataList.add(user);
-                                //userNameList.add(user.getfName());
                             }
                             cardAdapter.notifyDataSetChanged();
-                            //arrayAdapter.notifyDataSetChanged();
                             createSwipeView();
                         }
                     });
@@ -136,7 +133,6 @@ public class SwipePageFragment extends Fragment {
             public void removeFirstObjectInAdapter() {
                 userDataList.remove(0);
                 cardAdapter.notifyDataSetChanged();
-                //arrayAdapter.notifyDataSetChanged();
             }
 
             @Override
