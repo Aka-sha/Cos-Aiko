@@ -14,10 +14,9 @@ public class User {
 
     private String password;
 
-    //////// CONSTRUCTORS \\\\\\\\
-    public User() {
 
-    }
+    //////// CONSTRUCTORS \\\\\\\\
+
 
     public User(String fName, String lName, String email, String password) {
         this.fName = fName;

@@ -32,24 +32,24 @@ public class ExampleUnitTest {
         User user = new User(fnameText, lnameText, emailText, passwordText);
 
         UserService userService = ApiUtils.getUserService();
-        Call<ResponseBody> call = userService.login("bob", "jim");
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                // check if credentials matched (response code of 200 = success)
-                if (response.isSuccessful()) {
-                    // login successful
-                    System.out.println("SUCCESS");
-                } else { // response code 404 (no matching credentials)
-                    System.out.println("SUCCESS BUT WHATEVER");
-                }
-            }
-
-            @Override
-            public void onFailure(Call call, Throwable t) {
-                System.out.println("FAILURE");
-            }
-        });
+//        Call<ResponseBody> call = userService.login("bob", "jim");
+//        call.enqueue(new Callback<ResponseBody>() {
+//            @Override
+//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//                // check if credentials matched (response code of 200 = success)
+//                if (response.isSuccessful()) {
+//                    // login successful
+//                    System.out.println("SUCCESS");
+//                } else { // response code 404 (no matching credentials)
+//                    System.out.println("SUCCESS BUT WHATEVER");
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call call, Throwable t) {
+//                System.out.println("FAILURE");
+//            }
+//        });
         //assertEquals(4, 2 + 5);
     }
 }
