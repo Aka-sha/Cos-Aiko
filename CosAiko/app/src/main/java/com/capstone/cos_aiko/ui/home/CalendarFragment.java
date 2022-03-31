@@ -41,8 +41,8 @@ public class CalendarFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
-        calendarViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        //final TextView textView = binding.textHome;
+        //calendarViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
