@@ -70,7 +70,6 @@ public class Register extends AppCompatActivity {
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                 if (response.isSuccessful()) { // user successfully registered
-                    UserResponse currUser = response.body();
                     // login successful
                     Toast.makeText(getApplicationContext(), "Account successfully created. You may now login", Toast.LENGTH_SHORT).show();
                     Intent login = new Intent(getApplicationContext(), MainActivity.class);
