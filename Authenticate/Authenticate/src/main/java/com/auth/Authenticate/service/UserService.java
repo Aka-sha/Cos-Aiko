@@ -6,15 +6,12 @@ package com.auth.Authenticate.service;
 
 import com.auth.Authenticate.data.UserDto;
 import com.auth.Authenticate.dao.UserRepository;
-// import org.springframework.stereotype.Component;
 import com.auth.Authenticate.entity.UserEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
-// import javax.transaction.Transactional;
 import java.util.List;
 
-// @Component
 @Service("userService")
 public class UserService {
     // Middle layer between UserRepository and MainController
@@ -50,7 +47,7 @@ public class UserService {
      */
     public UserEntity saveUser(final UserDto userData) {
         UserEntity userModel = addUserData(userData);
-        return repo.save(userModel);
+        return userModel;
     }
 
     /**
