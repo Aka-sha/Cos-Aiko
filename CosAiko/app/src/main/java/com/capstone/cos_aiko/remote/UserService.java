@@ -61,9 +61,6 @@ public interface UserService {
      * @return Http Response from REST API
      */
     @GET("/users")
-    Call<List<User>> getAllUsers();
-    
-    @GET("/users")
     Call<List<UserResponse>> getAllUsersReponse();
 
     // PUT method to update user profile image
