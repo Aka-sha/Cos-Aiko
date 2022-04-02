@@ -150,7 +150,6 @@ public class PictureSelect extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                         if (response.isSuccessful()) { // user profile image successfully updated
-                            UserResponse user = response.body();
                             Toast.makeText(getApplicationContext(), "Profile successfully updated", Toast.LENGTH_SHORT).show();
                             // go to profile page to view changes
                             Intent profile = new Intent(getApplicationContext(), ProfilePage.class);
