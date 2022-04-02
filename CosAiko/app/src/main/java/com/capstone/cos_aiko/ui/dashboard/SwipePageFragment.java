@@ -20,7 +20,7 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.bumptech.glide.Glide;
+//import com.bumptech.glide.Glide;
 import com.capstone.cos_aiko.R;
 import com.capstone.cos_aiko.TabPage;
 import com.capstone.cos_aiko.databinding.FragmentDashboardBinding;

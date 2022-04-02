@@ -1,10 +1,12 @@
 package com.capstone.cos_aiko.ui.home;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.capstone.cos_aiko.PictureSelect;
 import com.capstone.cos_aiko.R;
 import com.capstone.cos_aiko.databinding.FragmentHomeBinding;
 
@@ -23,9 +26,40 @@ import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class CalendarFragment extends Fragment {
+// The following imports are from ProfilePage.java
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.capstone.cos_aiko.model.UserResponse;
+import com.capstone.cos_aiko.remote.ApiUtils;
+import com.capstone.cos_aiko.remote.UserService;
+import com.capstone.cos_aiko.storage.SharedPrefManager;
+import com.github.dhaval2404.imagepicker.ImagePicker;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class CalendarFragment extends Fragment {
     private FragmentHomeBinding binding;
+
+    Button addPicturesButton, logoutBtn;
+    private String FNAME, LNAME, NAME, EMAIL, BIO, PHONE;
+    TextView mName, mEmail, mBio, mPhone;
+    UserService userService;
+    ImageView profileImg;
 
     //Input code
     private TextView monthYearText;
@@ -33,10 +67,10 @@ public class CalendarFragment extends Fragment {
     private LocalDate selectedDate;
     private View root;
 
-    /* Creates and returns the view hierarchy associated with the fragment.
-    Called to have the fragment instantiate its user interface view. */
+    // Creates and returns the view hierarchy associated with the fragment.
+    //Called to have the fragment instantiate its user interface view.
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        CalendarViewModel calendarViewModel = new ViewModelProvider(this).get(CalendarViewModel.class);
+        //CalendarViewModel calendarViewModel = new ViewModelProvider(this).get(CalendarViewModel.class);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         root = binding.getRoot();
@@ -46,69 +80,30 @@ public class CalendarFragment extends Fragment {
         return root;
     }
 
-    private void initWidgets() {
-        calendarRecyclerView = root.findViewById(R.id.calendarRecyclerView);
-        monthYearText = root.findViewById(R.id.monthYearTV);
-    }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private void setMonthView() {
-        monthYearText.setText(monthYearFromDate(selectedDate));
-        ArrayList<String> daysInMonth = daysInMonthArray(selectedDate);
+    /*
+        addPicturesButton = (Button) findViewById(R.id.add_pic);
+        addPicturesButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent pictureSelectPage = new Intent(getApplicationContext(), PictureSelect.class);
+            startActivity(pictureSelectPage);
+        }
+    });
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.newact);
+        CalendarView calendarView=(CalendarView) findViewById(R.id.calendarView1);
+        calendarView.setOnDateChangeListener(new OnDateChangeListener() {
 
-        CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, (CalendarAdapter.OnItemListener) this);
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity().getApplicationContext(),7);
-        calendarRecyclerView.setLayoutManager(layoutManager);
-        calendarRecyclerView.setAdapter(calendarAdapter);
-    }
+            @Override
+            public void onSelectedDayChange(CalendarView view, int year, int month,
+                                            int dayOfMonth) {
+                Toast.makeText(getApplicationContext(), ""+dayOfMonth, 0).show();// TODO Auto-generated method stub
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private ArrayList<String> daysInMonthArray(LocalDate date) {
-        ArrayList<String> daysInMonthArray = new ArrayList<>();
-        YearMonth yearMonth = YearMonth.from(date);
-
-        int daysInMonth = yearMonth.lengthOfMonth();
-
-        LocalDate firstOfMonth = selectedDate.withDayOfMonth(1);
-        int dayOfWeek = firstOfMonth.getDayOfWeek().getValue();
-
-        for (int i = 1; i <= 42; i++){
-            if (i <= dayOfWeek || i > daysInMonth + dayOfWeek){
-                daysInMonthArray.add("");
-            } else {
-                daysInMonthArray.add(String.valueOf(i + dayOfWeek));
             }
-        }
-        return daysInMonthArray;
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private String monthYearFromDate(LocalDate date){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
-        return date.format(formatter);
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void previousMonthAction(View view){
-        selectedDate = selectedDate.minusMonths(1);
-        setMonthView();
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void nextMonthAction(View view){
-        selectedDate.plusMonths(1);
-        setMonthView();
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    //@Override -- doesnt override from  superclass says ide
-    public void onItemClick(int position, String dayText) {
-        if(dayText.equals("")){
-            String message = "Selected Date " + dayText + " " + monthYearFromDate(selectedDate);
-            //Toast.makeText(this, message, Toast.LENGTH_LONG).show(); --makeText has some sort of error...
-        }
-
-    }
+        });*/
     @Override
     public void onDestroyView() {
         super.onDestroyView();
