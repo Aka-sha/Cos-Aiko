@@ -2,6 +2,7 @@ package com.capstone.cos_aiko.ui.home;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,6 +36,7 @@ import com.capstone.cos_aiko.util.ImageCardAdapter;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.io.IOException;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -90,6 +92,8 @@ public class CalendarFragment extends Fragment {
     private CalendarView calendar;
     private TextView set_event;
 
+    private Button event_button;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container,Bundle savedInstanceState) {
 
@@ -111,13 +115,14 @@ public class CalendarFragment extends Fragment {
             {
 
                 String Date
-                        = dayOfMonth + "-"
-                        + (month + 1) + "-" + year;
+                        = (month + 1) + "/"
+                        + dayOfMonth + "/" + year;
 
                 // set this date in TextView for Display
                 set_event.setText(Date);
             }
         });
+
         calendar.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
@@ -127,7 +132,32 @@ public class CalendarFragment extends Fragment {
                 Log.d("calendar date", "changed");
             }
         });
+/*
+        event_button = (Button) root.findViewById(R.id.event_button);
+        String start = "2022-04-1T01:00:00";
+        String end = "2022-04-1T22:00:00";
+        //startTime = "04/1T09:00:00/2022";
+        //endTime = "04/1T12:00:00/2022";
+        String date_format = DateFormat.getDateInstance().format(start);
 
+        //String date_format = new SimpleDateFormat("MM-dd'T'HH:mm:ss-yyyy");
+        //String start_date = SimpleDateFormat.parse(start);
+        //String end_date = SimpleDateFormat.parse(end);
+
+        event_button.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void onClick(View view) {
+                Intent event_intent = new Intent(Intent.ACTION_EDIT);
+                event_intent.setType("vnd.android.cursor.item/event");
+                //event_intent.putExtra("beginTime", start_d.time);
+                event_intent.putExtra("time", true);
+                event_intent.putExtra("rule", "FREQ=YEARLY");
+                event_intent.putExtra("title", "Event");
+                startActivity(event_intent);
+                Log.d("calendar date", "changed");
+            }
+        });*/
         /*
         For something happening when new date is selected
          */
