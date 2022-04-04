@@ -145,12 +145,12 @@ public class CalendarFragment extends Fragment {
 
         //final TextView textView = binding.textNotifications;
         //messagesViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        return null;
+        return root;
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        //binding = null;
+        binding = null;
     }
 }
