@@ -19,6 +19,6 @@
         android:id="@+id/navigation_notifications"
         android:icon="@drawable/bubble_chat"
         android:title="@string/title_notifications"
-        android:iconTint="#F8E74F"/>
+        android:iconTint="#F8E74F" />
 
 </menu>

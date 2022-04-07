@@ -27,10 +27,10 @@ import retrofit2.Response;
 public class ProfilePage extends AppCompatActivity {
     Button addPicturesButton, logoutBtn;
     private String FNAME, LNAME, NAME, EMAIL, BIO, PHONE;
-    TextView mName, mEmail, mBio, mPhone;
-    UserService userService;
-    ImageView profileImg;
-
+    private TextView mName, mEmail, mBio, mPhone;
+    private UserService userService;
+    private ImageView profileImg;
+    private ImageView topNavBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +74,14 @@ public class ProfilePage extends AppCompatActivity {
                 startActivity(login);
             }
         });
-
+        topNavBack = findViewById(R.id.topbar_back);
+        topNavBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent tabPage = new Intent(getApplicationContext(), TabPage.class);
+                startActivity(tabPage);
+            }
+        });
     }
 
     /**
