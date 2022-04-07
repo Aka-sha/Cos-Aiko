@@ -6,6 +6,7 @@ package com.auth.Authenticate.entity;
  */
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -35,6 +36,20 @@ public class UserEntity {
     @Lob
     @Column(name = "image")
     private byte[] image;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "user_events", joinColumns = @JoinColumn(name = "uid"),
+                inverseJoinColumns = @JoinColumn(name = "eid"))
+    @Access(AccessType.FIELD)
+    private List<EventEntity> events;
+
+    @OneToMany(mappedBy = "requesterId", cascade = CascadeType.ALL)
+    @Access(AccessType.FIELD)
+    private List<Friendship> requesterId;
+
+    @OneToMany(mappedBy = "receiverId", cascade = CascadeType.ALL)
+    @Access(AccessType.FIELD)
+    private List<Friendship> receiverId;
 
     //////// CONSTRUCTORS \\\\\\\\
     public UserEntity() {
@@ -84,6 +99,12 @@ public class UserEntity {
 
     public byte[] getImage() { return image; }
 
+    public List<EventEntity> getEvents() { return events; }
+
+    public List<Friendship> getRequesterId() { return requesterId; }
+
+    public List<Friendship> getReceiverId() { return receiverId; }
+
     //////// SETTERS \\\\\\\\
     public void setId(Integer id) {
         this.id = id;
@@ -114,6 +135,12 @@ public class UserEntity {
     }
 
     public void setImage(byte[] image) { this.image = image; }
+
+    public void setEvents(List<EventEntity> events) { this.events = events; }
+
+    public void setRequesterId(List<Friendship> requesterId) { this.requesterId = requesterId; }
+
+    public void setReceiverId(List<Friendship> receiverId) { this.receiverId = receiverId; }
 
     @Override
     public String toString() {

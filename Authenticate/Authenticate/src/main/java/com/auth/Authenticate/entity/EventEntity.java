@@ -5,8 +5,10 @@ package com.auth.Authenticate.entity;
  * to the events table in our MySQL database.
  */
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.sql.Time;
+import java.util.List;
 
 @Entity
 @Table(name = "event")
@@ -28,6 +30,11 @@ public class EventEntity {
 
     @Column(name = "end_time")
     private Time endTime;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE},mappedBy = "events")
+    @Access(AccessType.FIELD)
+    @JsonIgnore
+    List<UserEntity> users;
 
     /// CONSTRUCTOR \\\
     public EventEntity() {
@@ -61,6 +68,8 @@ public class EventEntity {
         return this.endTime;
     }
 
+    public List<UserEntity> getUsers() { return this.users; }
+
     /// SETTERS \\\
     public void setEid(Integer eid) {
         this.eid = eid;
@@ -86,4 +95,5 @@ public class EventEntity {
         this.endTime = endTime;
     }
 
+    public void setUsers(List<UserEntity> users) { this.users = users; }
 }

@@ -47,4 +47,6 @@
     <string name="fname">First name</string>
     <string name="lname">Last name</string>
     <string name="prev_month">TODO</string>
+    <string name="pick_time">pick_time</string>
+    <string name="eventset">Set the Date</string>
 </resources>
