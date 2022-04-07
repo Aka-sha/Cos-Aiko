@@ -7,7 +7,11 @@
     android:paddingTop="10dp"
     android:paddingBottom="10dp"
     >
-
+    <ImageView
+        android:id="@+id/message_profile_image"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/rounded_button" />
     <TextView
         android:id="@+id/contact_name"
         android:layout_width="0dp"
@@ -22,5 +26,8 @@
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:textSize="10sp"
+        android:text="message"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/cosaiko_yellow"
         />
 </LinearLayout>

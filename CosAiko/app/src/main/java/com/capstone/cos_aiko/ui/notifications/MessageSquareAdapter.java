@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,6 +42,7 @@ public class MessageSquareAdapter extends
         // Set item views based on your views and data model
         TextView textView = holder.nameTextView;
         textView.setText(String.valueOf(contact.getUserId()));
+        if (contact.getUserImage() != null) holder.profileImage.setImageBitmap(contact.getUserImage());
 //        Button button = holder.messageButton;
 //        button.setText(contact.isFirstMessageReceived() ? "Message" : "Offline");
         //button.setEnabled(contact.isOnline());
@@ -53,11 +55,13 @@ public class MessageSquareAdapter extends
 
         public TextView nameTextView;
         public Button messageButton;
+        public ImageView profileImage;
 
 
         public ViewHolder(View itemView) {
             super(itemView);
 
+            profileImage = (ImageView) itemView.findViewById(R.id.message_profile_image);
             nameTextView = (TextView) itemView.findViewById(R.id.contact_name);
             messageButton = (Button) itemView.findViewById(R.id.message_button);
         }

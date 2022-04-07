@@ -1,16 +1,25 @@
 package com.capstone.cos_aiko.ui.notifications;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
+
 import java.util.ArrayList;
 
 public class MessageSquare {
     private int userId;
     private boolean firstMessageReceived;
-    private byte[]  userImage;
+    private String  userImage;
+    private Bitmap bmpImage;
 
-    public MessageSquare(int userId, boolean firstMessageReceived, byte[] userImage) {
+    public MessageSquare(int userId, boolean firstMessageReceived, String userImage) {
         this.userId = userId;
         this.firstMessageReceived = firstMessageReceived;
         this.userImage = userImage;
+
+        byte[] imageBytes = Base64.decode(userImage, Base64.DEFAULT);
+        // create bitmap for image
+        this.bmpImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
     }
 
     public int getUserId() {
@@ -29,13 +38,10 @@ public class MessageSquare {
         this.firstMessageReceived = firstMessageReceived;
     }
 
-    public byte[] getUserImage() {
-        return userImage;
+    public Bitmap getUserImage() {
+        return this.bmpImage;
     }
 
-    public void setUserImage(byte[] userImage) {
-        this.userImage = userImage;
-    }
 
     public static ArrayList<MessageSquare> getMessageSquareList(int numSquares) {
         ArrayList<MessageSquare> messageSquares = new ArrayList<MessageSquare>();
