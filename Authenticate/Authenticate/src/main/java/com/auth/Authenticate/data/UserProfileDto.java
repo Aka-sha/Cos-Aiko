@@ -67,4 +67,15 @@ public class UserProfileDto {
         this.image = image;
     }
 
+    public boolean equals(Object o){
+        if(o == null){
+            return false;
+        }
+        else if(!(o instanceof UserProfileDto)){
+            return false;
+        }
+        else{
+            return ((UserProfileDto) o).getEmail().equals(this.email);
+        }
+    }
 }

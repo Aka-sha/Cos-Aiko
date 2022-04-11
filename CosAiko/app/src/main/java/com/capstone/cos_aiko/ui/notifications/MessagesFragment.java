@@ -19,6 +19,7 @@ import com.capstone.cos_aiko.databinding.FragmentNotificationsBinding;
 import com.capstone.cos_aiko.model.UserResponse;
 import com.capstone.cos_aiko.remote.ApiUtils;
 import com.capstone.cos_aiko.remote.UserService;
+import com.capstone.cos_aiko.storage.SharedPrefManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +67,9 @@ public class MessagesFragment extends Fragment {
     public void fetchUserDetails(View root){
         // Make call for user data
         userService = ApiUtils.getUserService();
-        Call<List<UserResponse>> userData = userService.getAllUsersReponse();
+        SharedPrefManager prefManager = new SharedPrefManager();
+        String email = prefManager.getEmail(getActivity().getApplicationContext());
+        Call<List<UserResponse>> userData = userService.getFriends(email);
         userData.enqueue(new Callback<List<UserResponse>>() {
             @Override
             public void onResponse(Call<List<UserResponse>> call, Response<List<UserResponse>> response) {
