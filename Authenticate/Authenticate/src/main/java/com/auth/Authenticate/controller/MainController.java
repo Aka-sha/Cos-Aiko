@@ -251,14 +251,14 @@ public class MainController {
 
     /**
      *
-     * @param userId
+     * @param email
      * @param event
      * @return
      */
-    @PutMapping("/users/addEvent/{userId}")
-    public ResponseEntity<UserEntity> addEvent(@PathVariable Integer userId, @RequestBody EventEntity event){
+    @PutMapping("/users/addEvent/{email}")
+    public ResponseEntity<UserEntity> addEvent(@PathVariable String email, @RequestBody EventEntity event){
         // select the user by their id
-        UserEntity user = service.get(userId);
+        UserEntity user = service.getByEmail(email);
 
         if(user == null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
