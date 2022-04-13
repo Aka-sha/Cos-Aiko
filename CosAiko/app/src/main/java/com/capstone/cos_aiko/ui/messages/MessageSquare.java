@@ -1,4 +1,4 @@
-package com.capstone.cos_aiko.ui.notifications;
+package com.capstone.cos_aiko.ui.messages;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

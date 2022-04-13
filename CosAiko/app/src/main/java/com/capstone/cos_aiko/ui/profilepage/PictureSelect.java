@@ -1,23 +1,20 @@
-package com.capstone.cos_aiko;
+package com.capstone.cos_aiko.ui.profilepage;
 
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.media.Image;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.capstone.cos_aiko.PictureListContainer;
+import com.capstone.cos_aiko.R;
 import com.capstone.cos_aiko.model.UserResponse;
 import com.capstone.cos_aiko.remote.ApiUtils;
-import com.capstone.cos_aiko.remote.RetrofitClient;
 import com.capstone.cos_aiko.remote.UserService;
 import com.capstone.cos_aiko.storage.SharedPrefManager;
 import com.github.dhaval2404.imagepicker.ImagePicker;
@@ -33,7 +30,6 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class PictureSelect extends AppCompatActivity {
     private Button addImageButton, saveImgBtn;

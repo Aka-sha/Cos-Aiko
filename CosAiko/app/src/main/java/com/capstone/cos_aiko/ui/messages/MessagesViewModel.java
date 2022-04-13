@@ -1,4 +1,4 @@
-package com.capstone.cos_aiko.ui.notifications;
+package com.capstone.cos_aiko.ui.messages;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

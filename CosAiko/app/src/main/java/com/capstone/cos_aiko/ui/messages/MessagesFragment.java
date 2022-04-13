@@ -1,4 +1,4 @@
-package com.capstone.cos_aiko.ui.notifications;
+package com.capstone.cos_aiko.ui.messages;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -6,16 +6,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.capstone.cos_aiko.R;
 import com.capstone.cos_aiko.databinding.FragmentNotificationsBinding;
+import com.capstone.cos_aiko.ui.messages.sendmessage.SendMessageFragment;
 import com.capstone.cos_aiko.model.UserResponse;
 import com.capstone.cos_aiko.remote.ApiUtils;
 import com.capstone.cos_aiko.remote.UserService;
@@ -48,13 +49,18 @@ public class MessagesFragment extends Fragment {
         messageList = new ArrayList<>();
         //messageList = MessageSquare.getMessageSquareList(15);
 
-        messageSquareAdapter = new MessageSquareAdapter(messageList);
+        messageSquareAdapter = new MessageSquareAdapter(messageList, new MessageSquareAdapter.OnSquareClickListener() {
+            @Override
+            public void onSquareClick(int position) {
+                Log.d("Interface", "Message_button clicked");
+                replaceFragment(new SendMessageFragment());
+            }
+        });
         rvMessages.setAdapter(messageSquareAdapter);
 
         rvMessages.setLayoutManager(new LinearLayoutManager(fragmentActivity));
         fetchUserDetails(root);
-
-
+        //Button messageButton = fragmentActivity.findViewById(R.id.message_button);
         return root;
     }
 
@@ -63,6 +69,7 @@ public class MessagesFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
 
     public void fetchUserDetails(View root){
         // Make call for user data
@@ -102,4 +109,14 @@ public class MessagesFragment extends Fragment {
 
 
     }
+
+    private void replaceFragment(Fragment fragment) {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.nav_host_fragment_activity_tab_page,fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+
+    }
+
+
 }
