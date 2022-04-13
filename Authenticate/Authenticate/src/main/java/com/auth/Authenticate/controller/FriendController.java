@@ -30,7 +30,7 @@ public class FriendController {
     @PostMapping("/friend/addFriend/{userEmail}/{friendEmail}")
     public ResponseEntity<?> addFriend(@PathVariable String userEmail, @PathVariable String friendEmail){
         fService.saveFriend(userEmail, friendEmail);
-        return ResponseEntity.ok("Friend added successfully");
+        return new ResponseEntity<String>("Friend added successfully", HttpStatus.OK);
     }
 
     /**

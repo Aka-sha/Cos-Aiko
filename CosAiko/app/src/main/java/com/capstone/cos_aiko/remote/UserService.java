@@ -63,8 +63,6 @@ public interface UserService {
     @GET("/users")
     Call<List<UserResponse>> getAllUsersReponse();
 
-    // PUT method to update user profile image
-
     /**
      * PUT method to update user profile image
      *
@@ -81,4 +79,7 @@ public interface UserService {
 
     @GET("friend/listFriends/{email}")
     Call<List<UserResponse>> getFriends(@Path("email") String email);
+
+    @POST("friend/addFriend/{userEmail}/{friendEmail}")
+    Call<ResponseBody> addFriend(@Path("userEmail") String userEmail, @Path("friendEmail") String friendEmail);
 }

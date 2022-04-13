@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -29,6 +30,7 @@ import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -54,9 +56,12 @@ public class SwipePageFragment extends Fragment {
         userDataList = new ArrayList<>();
         final TextView textView = binding.textDashboard;
         swipePageViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
+        // Get current users email
         SharedPrefManager prefManager = new SharedPrefManager();
-        String email = prefManager.getEmail(getActivity().getApplicationContext());
-        Call<List<UserResponse>> userData = userService.getNonFriends(email);
+        String currEmail = prefManager.getEmail(getActivity().getApplicationContext());
+
+        Call<List<UserResponse>> userData = userService.getNonFriends(currEmail);
 
         //Image adapter
         cardAdapter = new ImageCardAdapter(userDataList, getContext());
@@ -137,6 +142,31 @@ public class SwipePageFragment extends Fragment {
 
             @Override
             public void onRightCardExit(Object o) {
+                // get friend being added email
+                UserResponse userFriend= (UserResponse) o;
+                String friendEmail = userFriend.getEmail();
+
+                // get current user email
+                SharedPrefManager sharedPref = new SharedPrefManager();
+                String currEmail = sharedPref.getEmail(getActivity().getApplicationContext());
+
+                Call<ResponseBody> call = userService.addFriend(currEmail, friendEmail);
+                call.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if(response.isSuccessful()){
+                            Toast.makeText(getActivity().getApplicationContext(), "Friend added successfully", Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            Toast.makeText(getActivity().getApplicationContext(), "Unable to process request", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                    }
+                });
 
             }
 
