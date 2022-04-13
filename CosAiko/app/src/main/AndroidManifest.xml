@@ -13,16 +13,16 @@
         android:theme="@style/Theme.CosAiko"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".PictureSelect"
+            android:name=".ui.profilepage.PictureSelect"
             android:exported="false" />
         <activity
-            android:name=".ProfilePage"
+            android:name=".ui.profilepage.ProfilePage"
             android:exported="false" /> <!-- For cleartext (HTTP) -->
         <activity
             android:name=".Register"
             android:exported="false" />
         <activity
-            android:name=".TabPage"
+            android:name=".ui.TabPage"
             android:exported="false"
             android:label="@string/title_activity_tab_page" />
         <activity
