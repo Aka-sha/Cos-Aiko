@@ -14,6 +14,7 @@ import com.auth.Authenticate.data.UserDto;
 import com.auth.Authenticate.data.UserProfileDto;
 import com.auth.Authenticate.entity.EventEntity;
 import com.auth.Authenticate.entity.UserEntity;
+import com.auth.Authenticate.service.FriendService;
 import com.auth.Authenticate.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -28,6 +29,8 @@ public class MainController {
 
     @Autowired
     private UserService service;
+    @Autowired
+    private FriendService friendService;
 
     // CRUD Operations
 
@@ -58,6 +61,33 @@ public class MainController {
 
         return users;
     }
+
+    @GetMapping("/users/nonFriends/{email}")
+    public List<UserProfileDto> getNonFriends(@PathVariable String email){
+        List<UserEntity> allUsers =  service.listAll();
+        List<UserProfileDto> users = new ArrayList<>();
+
+        for(UserEntity userEntity: allUsers){
+            UserProfileDto userProfile = new UserProfileDto();
+            userProfile.setfName(userEntity.getfName());
+            userProfile.setlName(userEntity.getlName());
+            userProfile.setEmail(userEntity.getEmail());
+            userProfile.setBio(userEntity.getBio());
+            userProfile.setPhone(userEntity.getPhone());
+            userProfile.setImage(userEntity.getImage());
+
+            users.add(userProfile);
+        }
+
+        List<UserProfileDto> userFriends = friendService.getFriends(email);
+        ResponseEntity<UserProfileDto> userProfileDto = findByEmail(email);
+
+        users.removeAll(userFriends);
+        users.remove(userProfileDto.getBody());
+
+        return users;
+    }
+
 
     /**
      * This function gets a user from DB by their unique email
@@ -221,14 +251,14 @@ public class MainController {
 
     /**
      *
-     * @param userId
+     * @param email
      * @param event
      * @return
      */
-    @PutMapping("/users/addEvent/{userId}")
-    public ResponseEntity<UserEntity> addEvent(@PathVariable Integer userId, @RequestBody EventEntity event){
+    @PutMapping("/users/addEvent/{email}")
+    public ResponseEntity<UserEntity> addEvent(@PathVariable String email, @RequestBody EventEntity event){
         // select the user by their id
-        UserEntity user = service.get(userId);
+        UserEntity user = service.getByEmail(email);
 
         if(user == null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

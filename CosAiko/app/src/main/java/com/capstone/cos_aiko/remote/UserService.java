@@ -76,4 +76,9 @@ public interface UserService {
     @Multipart
     Call<UserResponse> updateImage(@Part MultipartBody.Part img, @Path("email") String email);
 
+    @GET("/users/nonFriends/{email}")
+    Call<List<UserResponse>> getNonFriends(@Path("email") String email);
+
+    @GET("friend/listFriends/{email}")
+    Call<List<UserResponse>> getFriends(@Path("email") String email);
 }

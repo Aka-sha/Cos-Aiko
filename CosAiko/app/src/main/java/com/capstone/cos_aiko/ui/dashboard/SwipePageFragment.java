@@ -22,6 +22,7 @@ import com.capstone.cos_aiko.databinding.FragmentDashboardBinding;
 import com.capstone.cos_aiko.model.UserResponse;
 import com.capstone.cos_aiko.remote.ApiUtils;
 import com.capstone.cos_aiko.remote.UserService;
+import com.capstone.cos_aiko.storage.SharedPrefManager;
 import com.capstone.cos_aiko.util.ImageCardAdapter;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
@@ -53,7 +54,9 @@ public class SwipePageFragment extends Fragment {
         userDataList = new ArrayList<>();
         final TextView textView = binding.textDashboard;
         swipePageViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        Call<List<UserResponse>> userData = userService.getAllUsersReponse();
+        SharedPrefManager prefManager = new SharedPrefManager();
+        String email = prefManager.getEmail(getActivity().getApplicationContext());
+        Call<List<UserResponse>> userData = userService.getNonFriends(email);
 
         //Image adapter
         cardAdapter = new ImageCardAdapter(userDataList, getContext());

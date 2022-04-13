@@ -6,7 +6,7 @@ package com.auth.Authenticate.controller;
  * via this MainController class
  */
 
-import com.auth.Authenticate.data.UserDto;
+import com.auth.Authenticate.data.UserProfileDto;
 import com.auth.Authenticate.service.FriendService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,13 +35,13 @@ public class FriendController {
 
     /**
      *
-     * @param userId
+     * @param email
      * @return
      */
-    @GetMapping("/friend/listFriends/{userId}")
-    public ResponseEntity<List<UserDto>> getFriends(@PathVariable Integer userId){
-        List<UserDto> userFriends = fService.getFriends(userId);
-        return new ResponseEntity<List<UserDto>>(userFriends, HttpStatus.OK);
+    @GetMapping("/friend/listFriends/{email}")
+    public ResponseEntity<List<UserProfileDto>> getFriends(@PathVariable String email){
+        List<UserProfileDto> userFriends = fService.getFriends(email);
+        return new ResponseEntity<List<UserProfileDto>>(userFriends, HttpStatus.OK);
     }
 
 }
