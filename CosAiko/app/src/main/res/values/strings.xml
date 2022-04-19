@@ -49,4 +49,13 @@
     <string name="prev_month">TODO</string>
     <string name="pick_time">pick_time</string>
     <string name="eventset">Selected Date</string>
+    <string name="create_event">create_event</string>
+    <string name="edit_event">edit_event</string>
+    <string name="event_updated">event_update</string>
+    <string name="event_deleted">event_delete</string>
+    <string name="event_created">event_create</string>
+    <string name="warning_missing_calendar">err_calendar_no</string>
+    <string name="confirm_delete">delete_conf</string>
+    <string name="date">Date</string>
+    <string name="calendar_button">Calendar</string>
 </resources>

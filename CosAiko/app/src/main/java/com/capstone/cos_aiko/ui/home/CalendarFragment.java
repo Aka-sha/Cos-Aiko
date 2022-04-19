@@ -155,9 +155,11 @@ public class CalendarFragment extends Fragment {
                 event_intent.putExtra("rule", "FREQ=YEARLY");
                 event_intent.putExtra("title", "Event");
                 startActivity(event_intent);
-                Log.d("calendar date", "changed");
+                //Log.d("calendar date", "changed");
             }
-        });*/
+        });
+
+ */
         /*
         For something happening when new date is selected
          */
