@@ -1,3 +1,4 @@
+/*
 package com.capstone.cos_aiko;
 
 import android.Manifest;

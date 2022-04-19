@@ -1,10 +1,13 @@
-package com.capstone.cos_aiko;
+package com.capstone.cos_aiko.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.capstone.cos_aiko.MainActivity;
+import com.capstone.cos_aiko.R;
+import com.capstone.cos_aiko.ui.profilepage.ProfilePage;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,6 +31,7 @@ public class TabPage extends AppCompatActivity {
         setContentView(binding.getRoot());
         topNavBack = (ImageView) findViewById(R.id.topbar_back);
         BottomNavigationView navView = findViewById(R.id.nav_view);
+
         // Back button in topbar returns to login page
         topNavBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,6 +40,7 @@ public class TabPage extends AppCompatActivity {
                 startActivity(loginPage);
             }
         });
+
         // Profile button in topbar moves you to profile page
         topNavProfile = (ImageView) findViewById(R.id.topbar_profile);
         topNavProfile.setOnClickListener(new View.OnClickListener() {
@@ -52,5 +57,9 @@ public class TabPage extends AppCompatActivity {
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_tab_page);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
     }
+
+
+
 }

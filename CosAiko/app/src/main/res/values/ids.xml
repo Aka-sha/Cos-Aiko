@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- CALENDAR DIMEN           -->
 <resources>
-    <item name="event_edit_view" type="id">edit_event</item>
-    <item name="action_delete" type="id">action_delete</item>
-    <item name="form_title" type="id">form_title</item>
-    <item name="coordinator_layout" type="id">coordinate</item>
-    <item name="action_save" type="id" />
+
 </resources>

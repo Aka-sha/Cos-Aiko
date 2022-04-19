@@ -31,7 +31,6 @@
     <string name="day6">6</string>
 
 
-
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="calendar">calendar</string>
@@ -48,6 +47,7 @@
     <string name="lname">Last name</string>
     <string name="prev_month">TODO</string>
     <string name="pick_time">pick_time</string>
+
     <string name="eventset">Selected Date</string>
     <string name="create_event">create_event</string>
     <string name="edit_event">edit_event</string>
@@ -58,4 +58,6 @@
     <string name="confirm_delete">delete_conf</string>
     <string name="date">Date</string>
     <string name="calendar_button">Calendar</string>
+
+
 </resources>

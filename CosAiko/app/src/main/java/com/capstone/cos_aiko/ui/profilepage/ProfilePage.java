@@ -1,4 +1,4 @@
-package com.capstone.cos_aiko;
+package com.capstone.cos_aiko.ui.profilepage;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,18 +7,19 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.capstone.cos_aiko.MainActivity;
+import com.capstone.cos_aiko.R;
+import com.capstone.cos_aiko.ui.TabPage;
 import com.capstone.cos_aiko.model.UserResponse;
 import com.capstone.cos_aiko.remote.ApiUtils;
 import com.capstone.cos_aiko.remote.UserService;
 import com.capstone.cos_aiko.storage.SharedPrefManager;
-import com.github.dhaval2404.imagepicker.ImagePicker;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,10 +28,10 @@ import retrofit2.Response;
 public class ProfilePage extends AppCompatActivity {
     Button addPicturesButton, logoutBtn;
     private String FNAME, LNAME, NAME, EMAIL, BIO, PHONE;
-    TextView mName, mEmail, mBio, mPhone;
-    UserService userService;
-    ImageView profileImg;
-
+    private TextView mName, mEmail, mBio, mPhone;
+    private UserService userService;
+    private ImageView profileImg;
+    private ImageView topNavBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +75,14 @@ public class ProfilePage extends AppCompatActivity {
                 startActivity(login);
             }
         });
-
+        topNavBack = findViewById(R.id.topbar_back);
+        topNavBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent tabPage = new Intent(getApplicationContext(), TabPage.class);
+                startActivity(tabPage);
+            }
+        });
     }
 
     /**

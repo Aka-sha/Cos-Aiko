@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.capstone.cos_aiko.ui.notifications.MessagesFragment"
+        android:name="com.capstone.cos_aiko.ui.messages.MessagesFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
 </navigation>

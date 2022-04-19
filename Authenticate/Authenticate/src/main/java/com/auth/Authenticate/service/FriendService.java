@@ -5,7 +5,7 @@ package com.auth.Authenticate.service;
  */
 
 import com.auth.Authenticate.dao.FriendRepository;
-import com.auth.Authenticate.data.UserDto;
+import com.auth.Authenticate.data.UserProfileDto;
 import com.auth.Authenticate.entity.Friendship;
 import com.auth.Authenticate.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,35 +51,39 @@ public class FriendService {
 
     /**
      *
-     * @param id
+     * @param email
      * @return
      */
-    public List<UserDto> getFriends(Integer id){
-        UserEntity currUser = uService.get(id);
+    public List<UserProfileDto> getFriends(String email){
+        UserEntity currUser = uService.getByEmail(email);
 
         List<Friendship> friendByRequester = fRepo.findByRequesterId(currUser);
         List<Friendship> friendByReceiver = fRepo.findByReceiverId(currUser);
-        List<UserDto> userFriends = new ArrayList<>();
+        List<UserProfileDto> userFriends = new ArrayList<>();
 
         for(Friendship friend: friendByRequester){
             UserEntity user = uService.get(friend.getReceiverId().getId());
-            UserDto userDto = new UserDto();
+            UserProfileDto userDto = new UserProfileDto();
 
             userDto.setfName(user.getfName());
             userDto.setlName(user.getlName());
             userDto.setEmail(user.getEmail());
-            userDto.setPassword(user.getPassword());
+            userDto.setBio(user.getBio());
+            userDto.setPhone(user.getPhone());
+            userDto.setImage(user.getImage());
 
             userFriends.add(userDto);
         }
         for(Friendship friend: friendByReceiver){
             UserEntity user = uService.get(friend.getRequesterId().getId());
-            UserDto userDto = new UserDto();
+            UserProfileDto userDto = new UserProfileDto();
 
             userDto.setfName(user.getfName());
             userDto.setlName(user.getlName());
             userDto.setEmail(user.getEmail());
-            userDto.setPassword(user.getPassword());
+            userDto.setBio(user.getBio());
+            userDto.setPhone(user.getPhone());
+            userDto.setImage(user.getImage());
 
             userFriends.add(userDto);
         }

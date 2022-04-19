@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.messages.sendmessage.SendMessageFragment"
+    android:layout_marginTop="50dp">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50dp">
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/messageBubbleContainer"
+            android:layout_marginTop="100px"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/messagebubblerecycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <EditText
+            android:id="@+id/write_message"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/custom_input"
+            android:padding="20dp"
+            android:hint="Send a Message"
+            android:drawablePadding="12dp"
+            android:textColor="#3C3636"
+            android:drawableEnd="@drawable/ic_username"
+            android:textColorHint="#69707a"
+            android:textSize="14sp"
+            tools:layout_editor_absoluteX="10dp" />
+    </RelativeLayout>
+
+</FrameLayout>
