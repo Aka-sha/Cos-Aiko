@@ -1,4 +1,4 @@
-package com.capstone.cos_aiko.ui.dashboard;
+package com.capstone.cos_aiko.ui.swipepage;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

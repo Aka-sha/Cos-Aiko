@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.capstone.cos_aiko.R;
+import com.capstone.cos_aiko.config.Constants;
 import com.capstone.cos_aiko.databinding.FragmentNotificationsBinding;
 import com.capstone.cos_aiko.ui.messages.sendmessage.SendMessageFragment;
 import com.capstone.cos_aiko.model.UserResponse;
@@ -25,9 +26,14 @@ import com.capstone.cos_aiko.storage.SharedPrefManager;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.WebSocket;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import ua.naiksoftware.stomp.Stomp;
+import ua.naiksoftware.stomp.StompClient;
 
 public class MessagesFragment extends Fragment {
     private UserService userService;
@@ -36,6 +42,11 @@ public class MessagesFragment extends Fragment {
     private ArrayList<MessageSquare> messageList;
     private MessageSquareAdapter messageSquareAdapter;
     private Activity fragmentActivity;
+    private StompClient mStompClient;
+    //Chat websocket fields
+    private String name;
+    private WebSocket webSocket;
+    private String SERVER_PATH = "";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -60,7 +71,7 @@ public class MessagesFragment extends Fragment {
 
         rvMessages.setLayoutManager(new LinearLayoutManager(fragmentActivity));
         fetchUserDetails(root);
-        //Button messageButton = fragmentActivity.findViewById(R.id.message_button);
+        createSocketConnection();
         return root;
     }
 
@@ -82,7 +93,7 @@ public class MessagesFragment extends Fragment {
             public void onResponse(Call<List<UserResponse>> call, Response<List<UserResponse>> response) {
                 if (response.isSuccessful()) {
                     // User data request successful
-                    Log.d("getAllUsers" , "Response success");
+                    Log.d("getFriends" , "Response success");
 
                     fragmentActivity.runOnUiThread(new Runnable() {
                         @Override
@@ -91,6 +102,7 @@ public class MessagesFragment extends Fragment {
                                 if (user.getImage() != null){
                                     messageList.add(new MessageSquare(user.getId(), false, user.getImage()));
                                 }
+                                else messageList.add(new MessageSquare(user.getId(), false, null));
                                 messageSquareAdapter.notifyDataSetChanged();
                             }
                         }
@@ -116,6 +128,17 @@ public class MessagesFragment extends Fragment {
         transaction.addToBackStack(null);
         transaction.commit();
 
+    }
+
+    private void createSocketConnection(){
+        mStompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://" + Constants.address + ":8080/chat");
+        mStompClient.connect();
+
+        mStompClient.topic("/chatbroker/public").subscribe(topicMessage -> {
+            Log.d("socket_messages", topicMessage.getPayload());
+        });
+
+        mStompClient.send("/topic/chat.send", "My first STOMP message!").subscribe();
     }
 
 

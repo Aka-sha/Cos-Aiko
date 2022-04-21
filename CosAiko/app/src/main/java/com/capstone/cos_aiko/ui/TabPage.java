@@ -3,6 +3,7 @@ package com.capstone.cos_aiko.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.capstone.cos_aiko.MainActivity;
@@ -18,7 +19,10 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.capstone.cos_aiko.databinding.ActivityTabPageBinding;
 
+import okhttp3.WebSocket;
+
 public class TabPage extends AppCompatActivity {
+
 
     private ActivityTabPageBinding binding;
     ImageView topNavBack;

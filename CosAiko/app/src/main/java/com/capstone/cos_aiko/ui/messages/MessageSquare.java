@@ -17,9 +17,11 @@ public class MessageSquare {
         this.firstMessageReceived = firstMessageReceived;
         this.userImage = userImage;
 
-        byte[] imageBytes = Base64.decode(userImage, Base64.DEFAULT);
-        // create bitmap for image
-        this.bmpImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+        if (userImage != null){
+            byte[] imageBytes = Base64.decode(userImage, Base64.DEFAULT);
+            // create bitmap for image
+            this.bmpImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+        }
     }
 
     public int getUserId() {
