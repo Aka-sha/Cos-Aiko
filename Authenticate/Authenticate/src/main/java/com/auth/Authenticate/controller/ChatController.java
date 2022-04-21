@@ -28,15 +28,15 @@ public class ChatController {
     }
 
     @MessageMapping("/chat.send")
-    @SendTo("/chatbroker/public")
-    public Message sendMessage(@Payload Message message){
+    @SendTo("/topic/chatbroker")
+    public String sendMessage(@Payload String message){
         return message;
     }
 
     @MessageMapping("/chat")
     @SendTo("/topic/messages")
-    public String send(Message message) throws Exception {
-        return "working";
+    public Message send(@Payload Message message) throws Exception {
+        return message;
     }
 
     @MessageMapping("/chat/{to}")

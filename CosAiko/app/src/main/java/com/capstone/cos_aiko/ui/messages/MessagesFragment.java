@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -42,7 +43,8 @@ public class MessagesFragment extends Fragment {
     private ArrayList<MessageSquare> messageList;
     private MessageSquareAdapter messageSquareAdapter;
     private Activity fragmentActivity;
-    private StompClient mStompClient;
+
+    private View root;
     //Chat websocket fields
     private String name;
     private WebSocket webSocket;
@@ -54,7 +56,7 @@ public class MessagesFragment extends Fragment {
                 new ViewModelProvider(this).get(MessagesViewModel.class);
         fragmentActivity = this.getActivity();
         binding = FragmentNotificationsBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+        root = binding.getRoot();
 
         RecyclerView rvMessages = (RecyclerView) root.findViewById(R.id.messagerecycler);
         messageList = new ArrayList<>();
@@ -64,14 +66,13 @@ public class MessagesFragment extends Fragment {
             @Override
             public void onSquareClick(int position) {
                 Log.d("Interface", "Message_button clicked");
-                replaceFragment(new SendMessageFragment());
+                replaceFragment(new SendMessageFragment(messageList.get(position).getUserId()));
             }
         });
         rvMessages.setAdapter(messageSquareAdapter);
 
         rvMessages.setLayoutManager(new LinearLayoutManager(fragmentActivity));
         fetchUserDetails(root);
-        createSocketConnection();
         return root;
     }
 
@@ -100,9 +101,9 @@ public class MessagesFragment extends Fragment {
                         public void run() {
                             for (UserResponse user : response.body()){
                                 if (user.getImage() != null){
-                                    messageList.add(new MessageSquare(user.getId(), false, user.getImage()));
+                                    messageList.add(new MessageSquare(user.getEmail(), false, user.getImage()));
                                 }
-                                else messageList.add(new MessageSquare(user.getId(), false, null));
+                                else messageList.add(new MessageSquare(user.getEmail(), false, null));
                                 messageSquareAdapter.notifyDataSetChanged();
                             }
                         }
@@ -130,16 +131,7 @@ public class MessagesFragment extends Fragment {
 
     }
 
-    private void createSocketConnection(){
-        mStompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://" + Constants.address + ":8080/chat");
-        mStompClient.connect();
 
-        mStompClient.topic("/chatbroker/public").subscribe(topicMessage -> {
-            Log.d("socket_messages", topicMessage.getPayload());
-        });
-
-        mStompClient.send("/topic/chat.send", "My first STOMP message!").subscribe();
-    }
 
 
 }

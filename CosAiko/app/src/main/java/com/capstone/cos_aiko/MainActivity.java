@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     String email = response.body().getEmail();
                     // login successful
-                    Toast.makeText(getApplicationContext(), "Hello Javatpoint", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Welcome to cos-aiko!", Toast.LENGTH_SHORT).show();
                     Intent tabPage = new Intent(getApplicationContext(), TabPage.class);
 
                     // save email to shared preferences to manage user session

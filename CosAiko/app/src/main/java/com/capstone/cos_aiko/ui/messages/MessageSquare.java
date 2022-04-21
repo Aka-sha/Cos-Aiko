@@ -7,12 +7,12 @@ import android.util.Base64;
 import java.util.ArrayList;
 
 public class MessageSquare {
-    private int userId;
+    private String userId;
     private boolean firstMessageReceived;
     private String  userImage;
     private Bitmap bmpImage;
 
-    public MessageSquare(int userId, boolean firstMessageReceived, String userImage) {
+    public MessageSquare(String userId, boolean firstMessageReceived, String userImage) {
         this.userId = userId;
         this.firstMessageReceived = firstMessageReceived;
         this.userImage = userImage;
@@ -24,11 +24,11 @@ public class MessageSquare {
         }
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
@@ -45,13 +45,5 @@ public class MessageSquare {
     }
 
 
-    public static ArrayList<MessageSquare> getMessageSquareList(int numSquares) {
-        ArrayList<MessageSquare> messageSquares = new ArrayList<MessageSquare>();
 
-        for (int i = 1; i <= numSquares; i++) {
-            messageSquares.add(new MessageSquare(i, false, null));
-        }
-
-        return messageSquares;
-    }
 }
