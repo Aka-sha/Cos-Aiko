@@ -112,14 +112,14 @@ public class SendMessageFragment extends Fragment {
         mStompClient.topic("/topic/chatbroker").subscribe(topicMessage -> {
             String[] receivedMessageData = topicMessage.getPayload().split(":");
 
-            if (!receivedMessageData[0].equals(currentEmail) ){
-                messageList.add(new MessageBubble(receivedMessageData[2], 0,0));
-                messageBubbleAdapter.notifyDataSetChanged();
-            }
+//            if (!receivedMessageData[0].equals(currentEmail) ){
+//                messageList.add(new MessageBubble(receivedMessageData[2], 0,0));
+//                messageBubbleAdapter.notifyDataSetChanged();
+//            }
             activity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    messageList.add(new MessageBubble(receivedMessageData[0], 0,0));
+                    messageList.add(new MessageBubble(receivedMessageData[2], 0,0));
                     messageBubbleAdapter.notifyDataSetChanged();
                 }
             });
