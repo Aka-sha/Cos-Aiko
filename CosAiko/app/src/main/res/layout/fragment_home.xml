@@ -13,25 +13,32 @@
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="0dp">
 
-        <CalendarView
-            android:id="@+id/calendar"
-            android:layout_width="401dp"
-            android:layout_height="490dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
-            android:layout_marginBottom="50dp"
-            android:background="@color/purple_200" />
         <TextView
             android:id="@+id/set_event"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="150dp"
             android:layout_marginTop="20dp"
-            app:layout_constraintBottom_toBottomOf="@+id/calendar"
             android:text="@string/eventset"
             android:textColor="@android:color/background_dark"
-            android:textStyle="bold" />
-    </LinearLayout>
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/calendar" />
 
+        <CalendarView
+            android:id="@+id/calendar"
+            android:layout_width="401dp"
+            android:layout_height="319dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginBottom="180dp"
+            android:longClickable="true" />
+
+        <Button
+            android:id="@+id/event_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Set Event" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
