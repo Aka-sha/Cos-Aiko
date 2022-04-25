@@ -58,7 +58,7 @@ public class SwipePageFragment extends Fragment {
         swipePageViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         SharedPrefManager prefManager = new SharedPrefManager();
         String email = prefManager.getEmail(getActivity().getApplicationContext());
-        Call<List<UserResponse>> userData = userService.getNonFriends(email);
+        Call<List<UserResponse>> userData = userService.getAllUsersReponse();
 
         //Image adapter
         cardAdapter = new ImageCardAdapter(userDataList, getContext());

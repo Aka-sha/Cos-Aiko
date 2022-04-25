@@ -89,8 +89,6 @@ public class SendMessageFragment extends Fragment {
         LinearLayoutManager linearMan = new LinearLayoutManager(getActivity());
         rvMessages.setLayoutManager(linearMan);
         activity = this.getActivity();
-        messageList.add(new MessageBubble("Test1", 123, 123));
-        messageList.add(new MessageBubble("Test2", 123, 123));
         messageBubbleAdapter.notifyDataSetChanged();
         createSocketConnection();
         // Inflate the layout for this fragment
@@ -112,19 +110,23 @@ public class SendMessageFragment extends Fragment {
         mStompClient.topic("/topic/chatbroker").subscribe(topicMessage -> {
             String[] receivedMessageData = topicMessage.getPayload().split(":");
 
-//            if (!receivedMessageData[0].equals(currentEmail) ){
-//                messageList.add(new MessageBubble(receivedMessageData[2], 0,0));
-//                messageBubbleAdapter.notifyDataSetChanged();
-//            }
             activity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    messageList.add(new MessageBubble(receivedMessageData[2], 0,0));
-                    messageBubbleAdapter.notifyDataSetChanged();
+
+                        if (currentEmail.equals(receivedMessageData[0]) && currRecipient.equals(receivedMessageData[1]) ){
+                            messageList.add(new MessageBubble(receivedMessageData[2], 0,0));
+                            messageBubbleAdapter.notifyDataSetChanged();
+                        }
+                        else if (currentEmail.equals(receivedMessageData[1]) && currRecipient.equals(receivedMessageData[0])) {
+                        messageList.add(new MessageBubble(receivedMessageData[2], 0,0));
+                        messageBubbleAdapter.notifyDataSetChanged();
+                    }
+
                 }
             });
 
-            Log.d("Test", "TESTING THIS CALLBACK" + topicMessage.getPayload());
+            Log.d("mStompClient", "SendMessage mStompClient - " + topicMessage.getPayload());
         }, err -> {
             Log.d("Error", "Error occured handling chatbroker message");
         });

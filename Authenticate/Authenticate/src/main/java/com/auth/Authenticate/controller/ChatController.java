@@ -1,6 +1,9 @@
 package com.auth.Authenticate.controller;
 
 import com.auth.Authenticate.Message;
+import com.auth.Authenticate.entity.MessageEntity;
+import com.auth.Authenticate.entity.UserEntity;
+import com.auth.Authenticate.service.MessageService;
 import com.auth.Authenticate.service.UserService;
 import org.apache.commons.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,9 @@ public class ChatController {
     private UserService userService;
 
     @Autowired
+    private MessageService messageService;
+
+    @Autowired
     SimpMessagingTemplate simpMessagTemp;
 
     @MessageMapping("/broadcast")
@@ -30,6 +36,12 @@ public class ChatController {
     @MessageMapping("/chat.send")
     @SendTo("/topic/chatbroker")
     public String sendMessage(@Payload String message){
+        String[] splitMessage = message.split(":");
+        UserEntity sender = userService.getByEmail(splitMessage[0]);
+        UserEntity receiver = userService.getByEmail(splitMessage[1]);
+        long ut2 = System.currentTimeMillis() / 1000L;
+        MessageEntity messageEnt = new MessageEntity(sender, receiver, splitMessage[2], (int)ut2);
+        messageService.save(messageEnt);
         return message;
     }
 
