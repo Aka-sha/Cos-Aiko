@@ -1,4 +1,4 @@
-package com.capstone.cos_aiko.ui.dashboard;
+package com.capstone.cos_aiko.ui.swipepage;
 
 import android.app.Activity;
 import android.os.Build;
@@ -165,9 +165,9 @@ public class SwipePageFragment extends Fragment {
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
 
+
                     }
                 });
-
             }
 
             @Override

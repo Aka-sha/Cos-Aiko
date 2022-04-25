@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.capstone.cos_aiko.R;
+import com.capstone.cos_aiko.config.Constants;
 import com.capstone.cos_aiko.databinding.FragmentNotificationsBinding;
 import com.capstone.cos_aiko.ui.messages.sendmessage.SendMessageFragment;
 import com.capstone.cos_aiko.model.UserResponse;
@@ -25,9 +27,14 @@ import com.capstone.cos_aiko.storage.SharedPrefManager;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.WebSocket;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import ua.naiksoftware.stomp.Stomp;
+import ua.naiksoftware.stomp.StompClient;
 
 public class MessagesFragment extends Fragment {
     private UserService userService;
@@ -37,13 +44,19 @@ public class MessagesFragment extends Fragment {
     private MessageSquareAdapter messageSquareAdapter;
     private Activity fragmentActivity;
 
+    private View root;
+    //Chat websocket fields
+    private String name;
+    private WebSocket webSocket;
+    private String SERVER_PATH = "";
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         MessagesViewModel messagesViewModel =
                 new ViewModelProvider(this).get(MessagesViewModel.class);
         fragmentActivity = this.getActivity();
         binding = FragmentNotificationsBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+        root = binding.getRoot();
 
         RecyclerView rvMessages = (RecyclerView) root.findViewById(R.id.messagerecycler);
         messageList = new ArrayList<>();
@@ -53,14 +66,13 @@ public class MessagesFragment extends Fragment {
             @Override
             public void onSquareClick(int position) {
                 Log.d("Interface", "Message_button clicked");
-                replaceFragment(new SendMessageFragment());
+                replaceFragment(new SendMessageFragment(messageList.get(position).getUserId()));
             }
         });
         rvMessages.setAdapter(messageSquareAdapter);
 
         rvMessages.setLayoutManager(new LinearLayoutManager(fragmentActivity));
         fetchUserDetails(root);
-        //Button messageButton = fragmentActivity.findViewById(R.id.message_button);
         return root;
     }
 
@@ -82,15 +94,16 @@ public class MessagesFragment extends Fragment {
             public void onResponse(Call<List<UserResponse>> call, Response<List<UserResponse>> response) {
                 if (response.isSuccessful()) {
                     // User data request successful
-                    Log.d("getAllUsers" , "Response success");
+                    Log.d("getFriends" , "Response success");
 
                     fragmentActivity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             for (UserResponse user : response.body()){
                                 if (user.getImage() != null){
-                                    messageList.add(new MessageSquare(user.getId(), false, user.getImage()));
+                                    messageList.add(new MessageSquare(user.getEmail(), false, user.getImage()));
                                 }
+                                else messageList.add(new MessageSquare(user.getEmail(), false, null));
                                 messageSquareAdapter.notifyDataSetChanged();
                             }
                         }
@@ -117,6 +130,8 @@ public class MessagesFragment extends Fragment {
         transaction.commit();
 
     }
+
+
 
 
 }
