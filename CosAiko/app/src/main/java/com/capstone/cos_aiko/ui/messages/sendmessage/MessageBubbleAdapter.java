@@ -58,12 +58,14 @@ public class MessageBubbleAdapter extends
         // Set item views based on your views and data model
         TextView textView = holder.nameTextView;
         textView.setText(String.valueOf(message.getMessage()));
-        if (message.getSender() == currId) {
+        int sender = message.getSender();
+        if (sender == currId) {
             //textView.setBackgroundColor(Color.parseColor("#FFBB86FC"));
             textView.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.sent_rounded_button));
             textView.setWidth(45);
         }
         else {
+            textView.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.rounded_button));
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             params.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
             textView.setLayoutParams(params);

@@ -11,6 +11,7 @@ public class UserDto {
     private String lName;
     private String email;
     private String password;
+    private int id;
 
     public UserDto() {
         // empty constructor
@@ -50,5 +51,8 @@ public class UserDto {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public void setId(int id){   this.id = id; }
+    public int  getId() {   return this.id;    }
 
 }

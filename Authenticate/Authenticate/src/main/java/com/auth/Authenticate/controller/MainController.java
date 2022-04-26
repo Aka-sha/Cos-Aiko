@@ -161,6 +161,7 @@ public class MainController {
             userDto.setfName(user.getfName());
             userDto.setlName(user.getlName());
             userDto.setEmail(user.getEmail());
+            userDto.setId(user.getId());
             userDto.setPassword(user.getPassword());
 
             // return true and status code (200)
