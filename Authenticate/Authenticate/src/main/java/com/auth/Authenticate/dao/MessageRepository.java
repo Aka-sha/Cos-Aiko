@@ -12,4 +12,6 @@ import java.util.List;
 public interface MessageRepository extends JpaRepository<MessageEntity, Integer> {
     MessageEntity findByMid(Integer mid);
     List<MessageEntity> findAll();
+
+    List<MessageEntity> findMessageEntityBySenderIdAndReceiverId(UserEntity senderId, UserEntity receiverId);
 }

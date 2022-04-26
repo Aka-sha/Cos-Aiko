@@ -8,6 +8,7 @@
     android:paddingBottom="10dp"
     >
     <RelativeLayout
+        android:id="@+id/wrap_chat_relative"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <TextView
@@ -15,7 +16,6 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            android:layout_weight="1"
             android:textAlignment="center"
             android:background="@drawable/rounded_button"
             android:layout_alignParentRight="true"

@@ -1,17 +1,23 @@
 package com.capstone.cos_aiko.ui.messages.sendmessage;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.capstone.cos_aiko.R;
+import com.capstone.cos_aiko.storage.SharedPrefManager;
 import com.capstone.cos_aiko.ui.messages.MessageSquare;
 
 
@@ -21,9 +27,13 @@ public class MessageBubbleAdapter extends
         RecyclerView.Adapter<MessageBubbleAdapter.ViewHolder> {
 
     private List<MessageBubble> messageBubbleList;
+    private SharedPrefManager prefManager;
+    private int currId;
 
-    public MessageBubbleAdapter(List<MessageBubble> messageBubbleList) {
+    public MessageBubbleAdapter(List<MessageBubble> messageBubbleList, int currId) {
         this.messageBubbleList = messageBubbleList;
+        this.currId = currId;
+        prefManager = new SharedPrefManager();
     }
 
     @NonNull
@@ -48,6 +58,16 @@ public class MessageBubbleAdapter extends
         // Set item views based on your views and data model
         TextView textView = holder.nameTextView;
         textView.setText(String.valueOf(message.getMessage()));
+        if (message.getSender() == currId) {
+            //textView.setBackgroundColor(Color.parseColor("#FFBB86FC"));
+            textView.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.sent_rounded_button));
+            textView.setWidth(45);
+        }
+        else {
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            params.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
+            textView.setLayoutParams(params);
+        }
 
     }
 

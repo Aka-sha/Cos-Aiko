@@ -1,6 +1,7 @@
 package com.auth.Authenticate;
 
 import com.auth.Authenticate.dao.MessageRepository;
+import com.auth.Authenticate.dao.UserRepository;
 import com.auth.Authenticate.entity.MessageEntity;
 import com.auth.Authenticate.entity.UserEntity;
 import com.auth.Authenticate.service.UserService;
@@ -20,6 +21,9 @@ public class MessageDaoTests {
     @Autowired
     private UserService uService;
 
+    @Autowired
+    private UserRepository uRepo;
+
     @Test
     void testMessageEntity() {
         UserEntity pgriff = uService.getByEmail("pgriff@123.com");
@@ -34,5 +38,14 @@ public class MessageDaoTests {
         List<MessageEntity> ent = messageRepo.findAll();
 
         System.out.println(ent.get(0).getMessage());
+    }
+
+    @Test
+    void testFindByReceiverAndSender(){
+        UserEntity sender = uRepo.findById(7).get();
+        UserEntity receiver = uRepo.findById(3).get();
+        List<MessageEntity> message = messageRepo.findMessageEntityBySenderIdAndReceiverId(sender, receiver);
+
+        System.out.println(message.get(1).getMessage());
     }
 }

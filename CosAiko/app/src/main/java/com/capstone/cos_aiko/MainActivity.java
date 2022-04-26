@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 // check if credentials matched (response code of 200 = success)
                 if (response.isSuccessful()) {
                     String email = response.body().getEmail();
+                    int id = response.body().getId();
                     // login successful
                     Toast.makeText(getApplicationContext(), "Welcome to cos-aiko!", Toast.LENGTH_SHORT).show();
                     Intent tabPage = new Intent(getApplicationContext(), TabPage.class);
@@ -89,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                     // save email to shared preferences to manage user session
                     SharedPrefManager prefManager = new SharedPrefManager();
                     prefManager.saveEmail(getApplicationContext(), email);
-
+                    prefManager.saveId(getApplicationContext(), id);
                     Log.d(TAG, "email and saved" + email);
 
                     startActivity(tabPage);

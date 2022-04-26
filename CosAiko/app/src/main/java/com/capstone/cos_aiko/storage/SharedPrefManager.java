@@ -10,8 +10,10 @@ import android.content.SharedPreferences;
 public class SharedPrefManager { // manage user session using SharedPreferences
     // shared preference name
     private static final String PREF_NAME = "EMAIL_PREF";
+    private static final String PREF_ID = "ID_PREF";
     // store preference data
     private String KEY_EMAIL = "pref_email";
+    private String KEY_ID = "pref_id";
 
     // CONSTRUCTOR \\
     public SharedPrefManager() {
@@ -33,6 +35,21 @@ public class SharedPrefManager { // manage user session using SharedPreferences
         editor.apply(); // save email to shared preferences
     }
 
+    public void saveId(Context context, Integer data) {
+        SharedPreferences preferences;
+        SharedPreferences.Editor editor;
+        preferences = context.getSharedPreferences(PREF_ID, Context.MODE_PRIVATE);
+        editor = preferences.edit();
+        editor.putInt(KEY_ID, data);
+        editor.apply(); // save email to shared preferences
+    }
+    public int getId(Context context) {
+        int data;
+        SharedPreferences preferences;
+        preferences = context.getSharedPreferences(PREF_ID, Context.MODE_PRIVATE);
+        data = preferences.getInt(KEY_ID, -1); // defValue = "" --> return empty string if preference DNE
+        return data;
+    }
     /**
      * retrieve email value
      *

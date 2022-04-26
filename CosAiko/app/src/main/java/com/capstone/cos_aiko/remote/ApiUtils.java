@@ -26,4 +26,9 @@ public class ApiUtils {
         return RetrofitClient.getClient(BASE_URL).create(UserService.class);
     }
 
+    public static MessageService getMessageService() {
+        // create retrofit client
+        return RetrofitClient.getClient(BASE_URL).create(MessageService.class);
+    }
+
 }

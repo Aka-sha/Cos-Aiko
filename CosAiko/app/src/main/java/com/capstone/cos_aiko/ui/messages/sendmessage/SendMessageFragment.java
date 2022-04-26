@@ -18,12 +18,19 @@ import android.widget.Toast;
 
 import com.capstone.cos_aiko.R;
 import com.capstone.cos_aiko.config.Constants;
+import com.capstone.cos_aiko.model.Message;
+import com.capstone.cos_aiko.model.MessageResponse;
 import com.capstone.cos_aiko.model.UserResponse;
+import com.capstone.cos_aiko.remote.ApiUtils;
+import com.capstone.cos_aiko.remote.MessageService;
 import com.capstone.cos_aiko.storage.SharedPrefManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import ua.naiksoftware.stomp.Stomp;
 import ua.naiksoftware.stomp.StompClient;
 
@@ -48,6 +55,7 @@ public class SendMessageFragment extends Fragment {
     private String currRecipient;
     private String currentEmail;
     private Activity activity;
+    private MessageService messageService;
 
 
     public SendMessageFragment() {
@@ -83,12 +91,49 @@ public class SendMessageFragment extends Fragment {
 
         currentView =  root.getRootView();
         messageList = new ArrayList<>();
+        SharedPrefManager prefManager = new SharedPrefManager();
+        currentEmail = prefManager.getEmail(getActivity().getApplicationContext());
+        int currentId = prefManager.getId(getActivity().getApplicationContext());
         writeMessageBubble = currentView.findViewById(R.id.write_message);
-        messageBubbleAdapter = new MessageBubbleAdapter(messageList);
+        messageBubbleAdapter = new MessageBubbleAdapter(messageList, currentId);
         rvMessages.setAdapter(messageBubbleAdapter);
+        messageService = ApiUtils.getMessageService();
+
+
+
+        activity = this.getActivity();
+        Call<List<MessageResponse>> prevMessages = messageService.getPreviousMessagesBetweenUsers(currentEmail, currRecipient);
+        prevMessages.enqueue(new Callback<List<MessageResponse>>() {
+            @Override
+            public void onResponse(Call<List<MessageResponse>> call, Response<List<MessageResponse>> response) {
+                if (response.isSuccessful()) {
+                    // User data request successful
+                    Log.d("getAllUsers", "Response success");
+                    for (MessageResponse mess : response.body()) {
+                        MessageBubble message = new MessageBubble(mess.getMessage(), mess.getSenderId(), mess.getReceiverId());
+                        messageList.add(message);
+                    }
+//                    activity.runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            for (MessageResponse mess : response.body()) {
+//                                MessageBubble message = new MessageBubble(mess.getMessage(), mess.getSenderId(), mess.getReceiverId());
+//                                messageList.add(message);
+//                            }
+//                        }
+//                    });
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<MessageResponse>> call, Throwable t) {
+                Log.d("sendMessage", "Unable to fetch previous messages");
+            }
+        });
+
+
         LinearLayoutManager linearMan = new LinearLayoutManager(getActivity());
         rvMessages.setLayoutManager(linearMan);
-        activity = this.getActivity();
         messageBubbleAdapter.notifyDataSetChanged();
         createSocketConnection();
         // Inflate the layout for this fragment
@@ -99,8 +144,7 @@ public class SendMessageFragment extends Fragment {
     private void createSocketConnection(){
         mStompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://" + Constants.address + ":8080/chat");
         mStompClient.connect();
-        SharedPrefManager prefManager = new SharedPrefManager();
-        currentEmail = prefManager.getEmail(getActivity().getApplicationContext());
+
 
 
         Button sendButton = (Button) currentView.findViewById(R.id.send_button);

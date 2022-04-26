@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "messages")
-public class MessageEntity {
+public class MessageEntity  {
     @Id
     @Column(name = "mid", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -78,4 +78,6 @@ public class MessageEntity {
     public void setTime(int time) {
         this.time = time;
     }
+
+
 }
